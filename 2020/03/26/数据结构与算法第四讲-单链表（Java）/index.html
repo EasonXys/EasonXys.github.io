@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="en">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -82,10 +82,10 @@
 <meta name="description" content="数据结构与算法第四讲 单链表（Java）单链表一、基本定义链表是以结点作为存储方式的线性表，各结点在物理结构中不一定连续||data域||next域||。链表逻辑结构如下： 二、基本操作链表的基本操作为：增、删、改、查  增  直接将新节点插入尾部 1）首先创建一个head头节点，表示单链表头 2）每添加一个节点，直接加入链表最后（头节点不能移动，所以通过辅助变量temp进行遍历，找到尾节点）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法第四讲 单链表（Java）">
-<meta property="og:url" content="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://easonxys.github.io/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Amazing">
 <meta property="og:description" content="数据结构与算法第四讲 单链表（Java）单链表一、基本定义链表是以结点作为存储方式的线性表，各结点在物理结构中不一定连续||data域||next域||。链表逻辑结构如下： 二、基本操作链表的基本操作为：增、删、改、查  增  直接将新节点插入尾部 1）首先创建一个head头节点，表示单链表头 2）每添加一个节点，直接加入链表最后（头节点不能移动，所以通过辅助变量temp进行遍历，找到尾节点）">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584873883457&di=8eb0c681e7b21ebebe21731092d96909&imgtype=0&src=http%253A%252F%252Fimg3.imgtn.bdimg.com%252Fit%252Fu%253D2990144048%252C1530532508%2526fm%253D214%2526gp%253D0.jpg">
 <meta property="og:image" content="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1365902825,1839060756&fm=26&gp=0.jpg">
 <meta property="og:image" content="https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHBzL2ltYWdlczAuY25ibG9ncy5jb20vYmxvZzIwMTUvNzU1MjY1LzIwMTUwNy8wNTE1Mjg0ODU5MjEyMTEuanBn.jpg">
@@ -101,9 +101,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -123,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/03/26/数据结构与算法第四讲-单链表（Java）/"/>
+  <link rel="canonical" href="http://easonxys.github.io/2020/03/26/数据结构与算法第四讲-单链表（Java）/"/>
 
 
 
 
 
-  <title>数据结构与算法第四讲 单链表（Java） | Hexo</title>
+  <title>数据结构与算法第四讲 单链表（Java） | Amazing</title>
   
 
 
@@ -141,7 +141,7 @@
 
 <meta name="generator" content="Hexo 4.2.0"></head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -159,12 +159,12 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">Amazing</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">春有百花秋有月 夏有凉风冬有雪</p>
       
   </div>
 
@@ -190,6 +190,36 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
           </a>
         </li>
       
@@ -236,16 +266,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Eason">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/%5Bobject%20Object%5D">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="Amazing">
     </span>
 
     
@@ -477,6 +507,10 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/%5Bobject%20Object%5D"
+                alt="Eason" />
+            
               <p class="site-author-name" itemprop="name">Eason</p>
               <p class="site-description motion-element" itemprop="description">学习备忘录</p>
           </div>
@@ -534,6 +568,13 @@
       
 
       
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
 
     </div>
   </aside>
@@ -549,7 +590,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">Eason</span>
+  <span class="author" itemprop="copyrightHolder">徐宇颂</span>
 
   
 </div>
@@ -559,11 +600,7 @@
 
 
 
-  <span class="post-meta-divider">|</span>
 
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
 
 
 
@@ -580,11 +617,6 @@
       </div>
     </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
     
 
     
@@ -662,6 +694,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
