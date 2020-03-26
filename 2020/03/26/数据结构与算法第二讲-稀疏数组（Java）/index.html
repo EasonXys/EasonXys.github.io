@@ -79,15 +79,15 @@
 
 
 
-<meta name="description" content="数据结构与算法第二讲 稀疏数组（Java）稀疏数组一、应用场景当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示 二、处理方法1）记录原二维数组大小（几行几列），有多少个不同的值 2）把具有不同值的元素行、列、值记录在 小规模数组 （即稀疏数组）中 ​            第一行中，由左及右分别记录总行数、总列数、不同值的个数 ​            第二行中，记录非零值的行">
+<meta name="description" content="数据结构与算法第二讲 稀疏数组（Java）稀疏数组一、应用场景当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示 二、处理方法1）记录原二维数组大小（几行几列），有多少个不同的值 2）把具有不同值的元素行、列、值记录在 小规模数组 （即稀疏数组）中 ​            第一行中，由左及右分别记录总行数、总列数、不同值的个数 ​            第二行中，记录非零值">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法第二讲 稀疏数组（Java）">
 <meta property="og:url" content="http://easonxys.github.io/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%8C%E8%AE%B2-%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%EF%BC%88Java%EF%BC%89/index.html">
 <meta property="og:site_name" content="Amazing">
-<meta property="og:description" content="数据结构与算法第二讲 稀疏数组（Java）稀疏数组一、应用场景当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示 二、处理方法1）记录原二维数组大小（几行几列），有多少个不同的值 2）把具有不同值的元素行、列、值记录在 小规模数组 （即稀疏数组）中 ​            第一行中，由左及右分别记录总行数、总列数、不同值的个数 ​            第二行中，记录非零值的行">
+<meta property="og:description" content="数据结构与算法第二讲 稀疏数组（Java）稀疏数组一、应用场景当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示 二、处理方法1）记录原二维数组大小（几行几列），有多少个不同的值 2）把具有不同值的元素行、列、值记录在 小规模数组 （即稀疏数组）中 ​            第一行中，由左及右分别记录总行数、总列数、不同值的个数 ​            第二行中，记录非零值">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-03-26T08:30:06.000Z">
-<meta property="article:modified_time" content="2020-03-26T08:32:24.652Z">
+<meta property="article:modified_time" content="2020-03-26T15:50:37.985Z">
 <meta property="article:author" content="Eason">
 <meta name="twitter:card" content="summary">
 
@@ -318,6 +318,39 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  773
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
 
           
 
@@ -334,7 +367,9 @@
       
 
       
-        <h3 id="数据结构与算法第二讲-稀疏数组（Java）"><a href="#数据结构与算法第二讲-稀疏数组（Java）" class="headerlink" title="数据结构与算法第二讲 稀疏数组（Java）"></a>数据结构与算法第二讲 稀疏数组（Java）</h3><h4 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h4><h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示</p>
+        <a id="more"></a>
+
+<h3 id="数据结构与算法第二讲-稀疏数组（Java）"><a href="#数据结构与算法第二讲-稀疏数组（Java）" class="headerlink" title="数据结构与算法第二讲 稀疏数组（Java）"></a>数据结构与算法第二讲 稀疏数组（Java）</h3><h4 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h4><h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示</p>
 <h5 id="二、处理方法"><a href="#二、处理方法" class="headerlink" title="二、处理方法"></a>二、处理方法</h5><p>1）记录原二维数组大小（几行几列），有多少个不同的值</p>
 <p>2）把具有不同值的元素行、列、值记录在 小规模数组 （即稀疏数组）中</p>
 <p>​            第一行中，由左及右分别记录总行数、总列数、不同值的个数</p>
@@ -560,6 +595,10 @@
 
 
 
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5k字</span>
+</div>
 
 
 
