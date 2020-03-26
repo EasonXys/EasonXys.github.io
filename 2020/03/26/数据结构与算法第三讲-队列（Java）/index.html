@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据结构与算法第三讲 队列（Java）队列一、基本定义队列是只允许在一段进行插入操作，而在另一端进行删除操作的线性表。遵循 先进先出，后进后出。可以是一个有序列表，也可以用数组或者链表表示。  二、相关要素 最大容量 maxSize  队头 front    指向队头元素（）  队尾 rear     指向队尾的下一个位置 当 front&#x3D;rear 时 队列空，当 rear&#x3D;maxSize 时 队">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第三讲 队列（Java）">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%89%E8%AE%B2-%E9%98%9F%E5%88%97%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据结构与算法第三讲 队列（Java）队列一、基本定义队列是只允许在一段进行插入操作，而在另一端进行删除操作的线性表。遵循 先进先出，后进后出。可以是一个有序列表，也可以用数组或者链表表示。  二、相关要素 最大容量 maxSize  队头 front    指向队头元素（）  队尾 rear     指向队尾的下一个位置 当 front&#x3D;rear 时 队列空，当 rear&#x3D;maxSize 时 队">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2365584886,3270975640&fm=26&gp=0.jpg">
+<meta property="article:published_time" content="2020-03-26T08:34:57.000Z">
+<meta property="article:modified_time" content="2020-03-26T08:35:50.335Z">
+<meta property="article:author" content="Eason">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2365584886,3270975640&fm=26&gp=0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/26/数据结构与算法第三讲-队列（Java）/"/>
+
+
+
+
+
+  <title>数据结构与算法第三讲 队列（Java） | Hexo</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%89%E8%AE%B2-%E9%98%9F%E5%88%97%EF%BC%88Java%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第三讲 队列（Java）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-26T16:34:57+08:00">
+                2020-03-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="数据结构与算法第三讲-队列（Java）"><a href="#数据结构与算法第三讲-队列（Java）" class="headerlink" title="数据结构与算法第三讲 队列（Java）"></a>数据结构与算法第三讲 队列（Java）</h3><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><h5 id="一、基本定义"><a href="#一、基本定义" class="headerlink" title="一、基本定义"></a>一、基本定义</h5><p>队列是只允许在一段进行插入操作，而在另一端进行删除操作的线性表。遵循 <strong>先进先出，后进后出</strong>。可以是一个有序列表，也可以用数组或者链表表示。</p>
+<p><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2365584886,3270975640&fm=26&gp=0.jpg" alt="img"></p>
+<h5 id="二、相关要素"><a href="#二、相关要素" class="headerlink" title="二、相关要素"></a>二、相关要素</h5><ul>
+<li><p>最大容量 <code>maxSize</code></p>
+</li>
+<li><p>队头 <code>front</code>    指向队头元素（）</p>
+</li>
+<li><p>队尾 <code>rear</code>     指向队尾的下一个位置</p>
+<h6 id="当-front-rear-时-队列空，当-rear-maxSize-时-队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。"><a href="#当-front-rear-时-队列空，当-rear-maxSize-时-队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。" class="headerlink" title="当 front=rear 时 队列空，当 rear=maxSize 时 队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。"></a>当 <code>front=rear</code> 时 队列空，当 <code>rear=maxSize</code> 时 队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。</h6></li>
+</ul>
+<h5 id="三、循环队列"><a href="#三、循环队列" class="headerlink" title="三、循环队列"></a>三、循环队列</h5><p>为解决普通队列的“假溢出”，引入 <strong>循环队列</strong>——头尾相接的顺序存储队列，并对普通队列作出如下调整：</p>
+<ul>
+<li><p><em>保留一个元素空间作为队列满的约定</em></p>
+</li>
+<li><p>当队列满时，<code>front=(rear+1)%maxSize</code>;    当队列空时，<code>front=rear</code>;</p>
+</li>
+<li><p>队列有效元素为 <code>（rear+maxSize-front）%maxSize</code></p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueCircule</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] cq;    <span class="keyword">private</span> <span class="keyword">int</span> front;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> rear;    <span class="keyword">private</span> <span class="keyword">int</span> maxSize;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">QueueCircule</span><span class="params">(<span class="keyword">int</span> arrSize)</span></span>&#123;                           <span class="comment">//构造函数初始化</span></span><br><span class="line">        maxSize=arrSize;        cq=<span class="keyword">new</span> <span class="keyword">int</span>[maxSize];</span><br><span class="line">        front=rear=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ((rear+<span class="number">1</span>)%maxSize==front); <span class="comment">//判断循环队列是否为满</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (front==rear);            <span class="comment">//判断循环队列是否为空</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addQueue</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;                 <span class="comment">//增添队列元素</span></span><br><span class="line">        <span class="keyword">if</span> (isFull())&#123;</span><br><span class="line">            System.out.println(<span class="string">"循环队列已满，请勿增入"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cq[rear]=data;</span><br><span class="line">            rear=(rear+<span class="number">1</span>)%maxSize;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFirst</span><span class="params">()</span></span>&#123;                           <span class="comment">//输出队列头元素</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"该循环序列为空，无法输出头元素"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tem=cq[front];</span><br><span class="line">        front=(front+<span class="number">1</span>)%maxSize;</span><br><span class="line">        <span class="keyword">return</span> tem;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;                               <span class="comment">//得出该循环队列的有效长度</span></span><br><span class="line">        <span class="keyword">return</span> (rear+maxSize-front)%maxSize;</span><br><span class="line">    &#125;       <span class="comment">//循环队列中的有效元素个数</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;                             <span class="comment">//显示所有循环队列中的有效元素</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())&#123;</span><br><span class="line">            System.out.println(<span class="string">"该循环序列为空"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=front;i&lt;(front+size());i++)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"cq[%d]=%d\n"</span>,i%maxSize,cq[i%maxSize]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">head</span><span class="params">()</span></span>&#123;                      <span class="comment">//查看循环队列的首元素</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"该循环队列为空，无法查看头元素"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> cq[front];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%8C%E8%AE%B2-%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第二讲 稀疏数组（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第二讲 稀疏数组（Java）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/" rel="prev" title="数据结构与算法第四讲 单链表（Java）">
+                数据结构与算法第四讲 单链表（Java） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Eason</p>
+              <p class="site-description motion-element" itemprop="description">学习备忘录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与算法第三讲-队列（Java）"><span class="nav-number">1.</span> <span class="nav-text">数据结构与算法第三讲 队列（Java）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#队列"><span class="nav-number">1.1.</span> <span class="nav-text">队列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、基本定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、相关要素"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、相关要素</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#当-front-rear-时-队列空，当-rear-maxSize-时-队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">当 front&#x3D;rear 时 队列空，当 rear&#x3D;maxSize 时 队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、循环队列"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、循环队列</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Eason</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

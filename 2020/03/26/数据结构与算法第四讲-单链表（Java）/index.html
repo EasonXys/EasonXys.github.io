@@ -79,15 +79,21 @@
 
 
 
-<meta name="description" content="学习备忘录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="数据结构与算法第四讲 单链表（Java）单链表一、基本定义链表是以结点作为存储方式的线性表，各结点在物理结构中不一定连续||data域||next域||。链表逻辑结构如下： 二、基本操作链表的基本操作为：增、删、改、查  增  直接将新节点插入尾部 1）首先创建一个head头节点，表示单链表头 2）每添加一个节点，直接加入链表最后（头节点不能移动，所以通过辅助变量temp进行遍历，找到尾节点）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第四讲 单链表（Java）">
+<meta property="og:url" content="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="学习备忘录">
+<meta property="og:description" content="数据结构与算法第四讲 单链表（Java）单链表一、基本定义链表是以结点作为存储方式的线性表，各结点在物理结构中不一定连续||data域||next域||。链表逻辑结构如下： 二、基本操作链表的基本操作为：增、删、改、查  增  直接将新节点插入尾部 1）首先创建一个head头节点，表示单链表头 2）每添加一个节点，直接加入链表最后（头节点不能移动，所以通过辅助变量temp进行遍历，找到尾节点）">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584873883457&di=8eb0c681e7b21ebebe21731092d96909&imgtype=0&src=http%253A%252F%252Fimg3.imgtn.bdimg.com%252Fit%252Fu%253D2990144048%252C1530532508%2526fm%253D214%2526gp%253D0.jpg">
+<meta property="og:image" content="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1365902825,1839060756&fm=26&gp=0.jpg">
+<meta property="og:image" content="https://bbsmax.ikafan.com/static/L3Byb3h5L2h0dHBzL2ltYWdlczAuY25ibG9ncy5jb20vYmxvZzIwMTUvNzU1MjY1LzIwMTUwNy8wNTE1Mjg0ODU5MjEyMTEuanBn.jpg">
+<meta property="article:published_time" content="2020-03-26T08:43:15.000Z">
+<meta property="article:modified_time" content="2020-03-26T08:45:04.278Z">
 <meta property="article:author" content="Eason">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584873883457&di=8eb0c681e7b21ebebe21731092d96909&imgtype=0&src=http%253A%252F%252Fimg3.imgtn.bdimg.com%252Fit%252Fu%253D2990144048%252C1530532508%2526fm%253D214%2526gp%253D0.jpg">
 
 
 
@@ -117,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2020/03/26/数据结构与算法第四讲-单链表（Java）/"/>
 
 
 
 
 
-  <title>Hexo</title>
+  <title>数据结构与算法第四讲 单链表（Java） | Hexo</title>
   
 
 
@@ -142,8 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -216,9 +221,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -248,9 +253,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第四讲 单链表（Java）</a></h1>
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第四讲 单链表（Java）</h1>
         
 
         <div class="post-meta">
@@ -300,9 +303,7 @@
       
 
       
-        
-          
-            <h3 id="数据结构与算法第四讲-单链表（Java）"><a href="#数据结构与算法第四讲-单链表（Java）" class="headerlink" title="数据结构与算法第四讲 单链表（Java）"></a>数据结构与算法第四讲 单链表（Java）</h3><h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><h5 id="一、基本定义"><a href="#一、基本定义" class="headerlink" title="一、基本定义"></a>一、基本定义</h5><p>链表是以结点作为存储方式的线性表，各结点在物理结构中不一定连续<code>||data域||next域||</code>。链表逻辑结构如下：<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584873883457&di=8eb0c681e7b21ebebe21731092d96909&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D2990144048%2C1530532508%26fm%3D214%26gp%3D0.jpg" alt="img"></p>
+        <h3 id="数据结构与算法第四讲-单链表（Java）"><a href="#数据结构与算法第四讲-单链表（Java）" class="headerlink" title="数据结构与算法第四讲 单链表（Java）"></a>数据结构与算法第四讲 单链表（Java）</h3><h4 id="单链表"><a href="#单链表" class="headerlink" title="单链表"></a>单链表</h4><h5 id="一、基本定义"><a href="#一、基本定义" class="headerlink" title="一、基本定义"></a>一、基本定义</h5><p>链表是以结点作为存储方式的线性表，各结点在物理结构中不一定连续<code>||data域||next域||</code>。链表逻辑结构如下：<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1584873883457&di=8eb0c681e7b21ebebe21731092d96909&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D2990144048%2C1530532508%26fm%3D214%26gp%3D0.jpg" alt="img"></p>
 <h5 id="二、基本操作"><a href="#二、基本操作" class="headerlink" title="二、基本操作"></a>二、基本操作</h5><p>链表的基本操作为：<strong>增、删、改、查</strong></p>
 <ol>
 <li><p><strong>增</strong></p>
@@ -379,8 +380,6 @@
 
 <hr>
 
-          
-        
       
     </div>
     
@@ -397,153 +396,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%89%E8%AE%B2-%E9%98%9F%E5%88%97%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%89%E8%AE%B2-%E9%98%9F%E5%88%97%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第三讲 队列（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-26T16:34:57+08:00">
-                2020-03-26
-              </time>
+              <a href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%89%E8%AE%B2-%E9%98%9F%E5%88%97%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第三讲 队列（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第三讲 队列（Java）
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h3 id="数据结构与算法第三讲-队列（Java）"><a href="#数据结构与算法第三讲-队列（Java）" class="headerlink" title="数据结构与算法第三讲 队列（Java）"></a>数据结构与算法第三讲 队列（Java）</h3><h4 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h4><h5 id="一、基本定义"><a href="#一、基本定义" class="headerlink" title="一、基本定义"></a>一、基本定义</h5><p>队列是只允许在一段进行插入操作，而在另一端进行删除操作的线性表。遵循 <strong>先进先出，后进后出</strong>。可以是一个有序列表，也可以用数组或者链表表示。</p>
-<p><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2365584886,3270975640&fm=26&gp=0.jpg" alt="img"></p>
-<h5 id="二、相关要素"><a href="#二、相关要素" class="headerlink" title="二、相关要素"></a>二、相关要素</h5><ul>
-<li><p>最大容量 <code>maxSize</code></p>
-</li>
-<li><p>队头 <code>front</code>    指向队头元素（）</p>
-</li>
-<li><p>队尾 <code>rear</code>     指向队尾的下一个位置</p>
-<h6 id="当-front-rear-时-队列空，当-rear-maxSize-时-队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。"><a href="#当-front-rear-时-队列空，当-rear-maxSize-时-队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。" class="headerlink" title="当 front=rear 时 队列空，当 rear=maxSize 时 队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。"></a>当 <code>front=rear</code> 时 队列空，当 <code>rear=maxSize</code> 时 队列满。使用一维数组模拟队列存在空间占用问题，即元素取出队列后，该元素仍然占据数组空间，造成“假溢出”。</h6></li>
-</ul>
-<h5 id="三、循环队列"><a href="#三、循环队列" class="headerlink" title="三、循环队列"></a>三、循环队列</h5><p>为解决普通队列的“假溢出”，引入 <strong>循环队列</strong>——头尾相接的顺序存储队列，并对普通队列作出如下调整：</p>
-<ul>
-<li><p><em>保留一个元素空间作为队列满的约定</em></p>
-</li>
-<li><p>当队列满时，<code>front=(rear+1)%maxSize</code>;    当队列空时，<code>front=rear</code>;</p>
-</li>
-<li><p>队列有效元素为 <code>（rear+maxSize-front）%maxSize</code></p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueCircule</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[] cq;    <span class="keyword">private</span> <span class="keyword">int</span> front;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> rear;    <span class="keyword">private</span> <span class="keyword">int</span> maxSize;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">QueueCircule</span><span class="params">(<span class="keyword">int</span> arrSize)</span></span>&#123;                           <span class="comment">//构造函数初始化</span></span><br><span class="line">        maxSize=arrSize;        cq=<span class="keyword">new</span> <span class="keyword">int</span>[maxSize];</span><br><span class="line">        front=rear=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isFull</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ((rear+<span class="number">1</span>)%maxSize==front); <span class="comment">//判断循环队列是否为满</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (front==rear);            <span class="comment">//判断循环队列是否为空</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addQueue</span><span class="params">(<span class="keyword">int</span> data)</span></span>&#123;                 <span class="comment">//增添队列元素</span></span><br><span class="line">        <span class="keyword">if</span> (isFull())&#123;</span><br><span class="line">            System.out.println(<span class="string">"循环队列已满，请勿增入"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            cq[rear]=data;</span><br><span class="line">            rear=(rear+<span class="number">1</span>)%maxSize;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFirst</span><span class="params">()</span></span>&#123;                           <span class="comment">//输出队列头元素</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"该循环序列为空，无法输出头元素"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tem=cq[front];</span><br><span class="line">        front=(front+<span class="number">1</span>)%maxSize;</span><br><span class="line">        <span class="keyword">return</span> tem;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>&#123;                               <span class="comment">//得出该循环队列的有效长度</span></span><br><span class="line">        <span class="keyword">return</span> (rear+maxSize-front)%maxSize;</span><br><span class="line">    &#125;       <span class="comment">//循环队列中的有效元素个数</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">()</span></span>&#123;                             <span class="comment">//显示所有循环队列中的有效元素</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())&#123;</span><br><span class="line">            System.out.println(<span class="string">"该循环序列为空"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=front;i&lt;(front+size());i++)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"cq[%d]=%d\n"</span>,i%maxSize,cq[i%maxSize]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">head</span><span class="params">()</span></span>&#123;                      <span class="comment">//查看循环队列的首元素</span></span><br><span class="line">        <span class="keyword">if</span> (isEmpty())&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"该循环队列为空，无法查看头元素"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> cq[front];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -553,476 +427,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%8C%E8%AE%B2-%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%8C%E8%AE%B2-%E7%A8%80%E7%96%8F%E6%95%B0%E7%BB%84%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第二讲 稀疏数组（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-26T16:30:06+08:00">
-                2020-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="数据结构与算法第二讲-稀疏数组（Java）"><a href="#数据结构与算法第二讲-稀疏数组（Java）" class="headerlink" title="数据结构与算法第二讲 稀疏数组（Java）"></a>数据结构与算法第二讲 稀疏数组（Java）</h3><h4 id="稀疏数组"><a href="#稀疏数组" class="headerlink" title="稀疏数组"></a>稀疏数组</h4><h5 id="一、应用场景"><a href="#一、应用场景" class="headerlink" title="一、应用场景"></a>一、应用场景</h5><p>当数组中大部分元素为0，或者为同一值的数组时，可以使用稀疏数组来表示</p>
-<h5 id="二、处理方法"><a href="#二、处理方法" class="headerlink" title="二、处理方法"></a>二、处理方法</h5><p>1）记录原二维数组大小（几行几列），有多少个不同的值</p>
-<p>2）把具有不同值的元素行、列、值记录在 小规模数组 （即稀疏数组）中</p>
-<p>​            第一行中，由左及右分别记录总行数、总列数、不同值的个数</p>
-<p>​            第二行中，记录非零值的行、列索引及值</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">		二维数组					   转换后的稀疏数组</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> 			<span class="number">11</span>		<span class="number">12</span>		<span class="number">4</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> 			<span class="number">1</span>		<span class="number">2</span>		<span class="number">1</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> 			<span class="number">3</span>		<span class="number">4</span>		<span class="number">2</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">2</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> 			<span class="number">5</span>		<span class="number">6</span>		<span class="number">3</span>	</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> 			<span class="number">7</span>		<span class="number">8</span>		<span class="number">4</span></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">3</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">4</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> 					</span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> </span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="三、相互转换思路步骤"><a href="#三、相互转换思路步骤" class="headerlink" title="三、相互转换思路步骤"></a>三、相互转换思路步骤</h5><p><strong><em>二维数组转换为稀疏数组</em></strong></p>
-<ol>
-<li>遍历原始二维数组 <code>chessArray1</code>，得到有效数据个数<code>sum</code>；</li>
-<li>根据<code>sum</code>创建稀疏数组 <code>int spareseArray[][]=new int[sum+1][3]</code>;</li>
-<li>将 <code>chessArray1</code> 有效数据存入 <code>spareseArray</code> 中。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//==================Ⅰ二维数组转稀疏数组===============================</span></span><br><span class="line"><span class="comment">//        1.遍历原始二维数组，得到有效数据个数sum</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;chessArray1.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;chessArray1[<span class="number">0</span>].length;j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArray1[i][j]!=<span class="number">0</span>)&#123;</span><br><span class="line">                    sum++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">//        2.根据sum创建稀疏数组 int[sum+1][3]</span></span><br><span class="line">        <span class="keyword">int</span> spareseArray[][]=<span class="keyword">new</span> <span class="keyword">int</span>[sum+<span class="number">1</span>][<span class="number">3</span>];</span><br><span class="line">        spareseArray[<span class="number">0</span>][<span class="number">0</span>]=chessArray1.length;</span><br><span class="line">        spareseArray[<span class="number">0</span>][<span class="number">1</span>]=chessArray1[<span class="number">0</span>].length;</span><br><span class="line">        spareseArray[<span class="number">0</span>][<span class="number">2</span>]=sum;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> count=<span class="number">1</span>;</span><br><span class="line">        System.out.println(<span class="string">"转化后的稀疏数组"</span>);</span><br><span class="line"><span class="comment">//        3.将原始二维数组有效数据存入稀疏数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;chessArray1.length;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;chessArray1[<span class="number">0</span>].length;j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (chessArray1[i][j] != <span class="number">0</span>) &#123;</span><br><span class="line">                    spareseArray[count][<span class="number">0</span>] = i;</span><br><span class="line">                    spareseArray[count][<span class="number">1</span>] = j;</span><br><span class="line">                    spareseArray[count][<span class="number">2</span>] = chessArray1[i][j];</span><br><span class="line">                    count++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span>[] row:spareseArray)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"%d\t%d\t%d\t\n"</span>,row[<span class="number">0</span>],row[<span class="number">1</span>],row[<span class="number">2</span>]);<span class="comment">//方便的二维数组输出</span></span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>稀疏数组还原为二维数组</em></strong></p>
-<ol>
-<li><p>先读取 <code>spareseArray</code> 第一行信息创建二维数组 <code>chessArray2</code>；</p>
-</li>
-<li><p>读取 <code>spareseArray</code> 后几行数据，并赋值给 <code>chessArray2</code>。</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//==================Ⅱ二维数组转稀疏数组===============================</span></span><br><span class="line"><span class="comment">//        1.先读取spareseArray第一行创建原始二维数组</span></span><br><span class="line">        <span class="keyword">int</span> chessArray2[][]=<span class="keyword">new</span> <span class="keyword">int</span>[spareseArray[<span class="number">0</span>][<span class="number">0</span>]][spareseArray[<span class="number">0</span>][<span class="number">1</span>]];</span><br><span class="line"><span class="comment">//        2.读取spareseArray后几行，然后对应赋值</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;spareseArray.length;i++)&#123;</span><br><span class="line">            chessArray2[spareseArray[i][<span class="number">0</span>]][spareseArray[i][<span class="number">1</span>]]=spareseArray[i][<span class="number">2</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//我的表达：三层嵌套，太复杂了</span></span><br><span class="line"><span class="comment">// for (int i=0;i&lt;chessArray2.length;i++)&#123;</span></span><br><span class="line"><span class="comment">//        for (int j=0;j&lt;chessArray2[0].length;j++)&#123;</span></span><br><span class="line"><span class="comment">//            for (int k=1;k&lt;spareseArray.length;k++)&#123;</span></span><br><span class="line"><span class="comment">//               chessArray2[spareseArray[k][0]][spareseArray[k][1]]=spareseArray[k][2];</span></span><br><span class="line"><span class="comment">//                &#125;</span></span><br><span class="line"><span class="comment">//            &#125;</span></span><br><span class="line"><span class="comment">//        &#125;</span></span><br><span class="line">        System.out.println(<span class="string">"稀疏数组还原原始二维数组"</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] row:chessArray2)&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> data:row)&#123;</span><br><span class="line">                System.out.print(data+<span class="string">" "</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%BB%AA%E8%AE%BA/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B8%80%E8%AE%B2-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%BB%AA%E8%AE%BA/" itemprop="url">数据结构第一讲 数据结构与算法绪论</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-26T15:28:08+08:00">
-                2020-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="数据结构与算法第一讲-数据结构与算法绪论"><a href="#数据结构与算法第一讲-数据结构与算法绪论" class="headerlink" title="数据结构与算法第一讲 数据结构与算法绪论"></a>数据结构与算法第一讲 数据结构与算法绪论</h1><h3 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h3><ol>
-<li><p><strong>程序设计 = 数据结构 + 算法</strong></p>
-</li>
-<li><p><strong>数据结构</strong>:是相关之间存在一种或者多种特定关系的数据元素的集合</p>
-</li>
-<li><p><strong>数据元素</strong>：是组成数据的，有一定意义的基本单位，在计算机中通常作为整体处理，也称为「记录」。其中一个<strong>数据元素</strong>可以由若干个<strong>数据项</strong>组成。<strong>数据项</strong>是数据不可分割的最小单位。</p>
-</li>
-<li><p><strong>数据对象</strong>：是性质相同的数据元素的集合，是数据的子集。</p>
-</li>
-<li><p>按照视点不同，数据结构可以分为 <strong>逻辑结构</strong> 和 <strong>物理结构</strong>，数据元素的存储关系并不能反映逻辑关系，因此需要用一个<font color="grey">指针</font>存放数据元素地址</p>
-</li>
-</ol>
-<ul>
-<li><p>逻辑结构：是指数据对象中数据元素之间的相互关系</p>
-<ul>
-<li>集合结构：<em>同属同一集合而已</em></li>
-<li>线性结构：<em>一对一的关系</em></li>
-<li>树形结构：<em>存在一对多的关系</em></li>
-<li>图形结构：<em>多对多的关系</em></li>
-</ul>
-</li>
-<li><p>物理结构（存储结构）：是指数据的逻辑结构在计算机中的存储形式</p>
-<ul>
-<li>顺序存储：<em>类似于排队占位（连续）</em></li>
-<li>链式存储结构：<em>把数据元素存放在任意存储单元（可连续可不连续）</em></li>
-</ul>
-<p>逻辑结构是面向问题的；而物理结构是面向计算机的，其基本目标就是将数据及其逻辑关系存储至计算机内存中。</p>
-</li>
-</ul>
-<ol start="6">
-<li><strong>数据类型</strong>：是指一组性质相同值的集合及定义在此集合上一些操作的总称。在C语言中，按照取值不同，可以分为<code>原子类型：不可分解的基本类型</code>和<code>结构类型：由若干类型组合而成，可再分解</code></li>
-<li><strong>抽象数据类型(Abstract Data Type ADT)</strong><br>指一个数学模型以及定义在该模型上的一组操作（与逻辑特性有关，与计算机内部表示、实现无关，操作视具体需求而定）</li>
-</ol>
-<hr>
-<h3 id="二、算法"><a href="#二、算法" class="headerlink" title="二、算法"></a>二、算法</h3><ol>
-<li><p><strong>算法</strong>：算法是解决特定问题求解步骤的描述，在计算机中表现为指令的有限序列，并且每条指令表示一个或者多个操作。算法具有五个基本特性：<u>输入、输出、有穷性、确定性和可行性</u></p>
-</li>
-<li><p><strong>算法设计要求</strong>   算法设计不是唯一的，但是必须符合以下要求：</p>
-<ul>
-<li>正确性：算法至少应该具有输入、输出和加工处理无歧义性、能正确反映问题的需求、能够得到问题的正确答案</li>
-<li>可读性：便于阅读、理解和交流</li>
-<li>健壮性：当输入数据不合法时，算法也能做出相关处理，而不是产生异常或莫名奇妙的结果</li>
-<li>时间效率高和存储量低</li>
-</ul>
-</li>
-<li><p><strong>算法效率的度量方法</strong></p>
-<ul>
-<li><strong>事后统计方法</strong>：通过设计好的测试程序和数据，利用计算机计时器对不同算法编制的程序运行时间进行比较，从而确定算法效率高低</li>
-<li><strong>事前分析估算方法</strong>：在计算机程序编制前，依据统计方法对算法进行估算。测定运行时间最可靠的方法就是计算对运行时间有消耗的基本操作的执行次数。运行时间与执行次数成正比</li>
-</ul>
-<p>一个用高级程序语言编写的程序在计算机上运行时所消耗的时间取决于下列因素：<br>1) <strong>算法采用的策略、方法</strong>        2) 编译产生的代码质量（由软件支持）<br>3) 问题的输入规模                   4) 机器执行指令的速度（与硬件性能有关）</p>
-</li>
-<li><p><strong>算法时间复杂度</strong><br><strong>在进行算法分析时，算法时间复杂度T(n)是关于问题规模n的函数，进而分析T(n)随n的变化情况并确定T(n)的数量级，记作T(n)=O(f(n))。其中f(n)是问题规模n的某个函数，判断算法效率时，函数中的常数项和其他次要项可以忽略，应该关注主项的次数。</strong></p>
-</li>
-<li><p><strong>常见的时间复杂度</strong><br>如下表所示，时间复杂度可以表示最坏情况</p>
-<img src="https://images2018.cnblogs.com/blog/871853/201808/871853-20180818000458289-1752659828.png" alt="img" style="zoom:67%;"></li>
-<li><p><strong>算法空间复杂度</strong><br><strong>算法空间复杂度通过计算算法所需的存储空间实现，记作S(n)=O(f(n))，其中，n为问题规模，f(n)为语句关于n所占存储空间的函数。</strong></p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E5%92%8CGithub%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/26/%E4%BD%BF%E7%94%A8Hexo%E6%A1%86%E6%9E%B6%E5%92%8CGithub%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%9B%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="url">使用Hexo框架和Github服务器创建个人博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-26T13:37:16+08:00">
-                2020-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="使用Hexo框架和Github服务器创建个人博客"><a href="#使用Hexo框架和Github服务器创建个人博客" class="headerlink" title="使用Hexo框架和Github服务器创建个人博客"></a>使用Hexo框架和Github服务器创建个人博客</h2><h3 id="一、准备阶段"><a href="#一、准备阶段" class="headerlink" title="一、准备阶段"></a>一、准备阶段</h3><p>1.首先判断是否安装 node、npm、git等必要工具，<code>node -v</code>,<code>npm -v</code>,<code>git --version</code>在终端输入，并获得管理员权限<code>sudo su</code>（在Linux系统下）</p>
-<p>2.切换npm的国内镜像源，如淘宝镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g cnpm --registery = https://registery.npm.taobao.org</span><br></pre></td></tr></table></figure>
-<p>3.使用cnpm安装hexo框架</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install -g hexo-cli</span><br></pre></td></tr></table></figure>
-<p>4.在自定义位置创建一个空文件夹 blog:<code>mkdir blog</code>，并在该文件夹的路径下完成hexo的初始化:<code>hexo init</code></p>
-<h3 id="二、本地部署以及博客书写"><a href="#二、本地部署以及博客书写" class="headerlink" title="二、本地部署以及博客书写"></a>二、本地部署以及博客书写</h3><p>1.创建新博客:<code>hexo n &quot;blogName&quot;</code></p>
-<p>2.对博客内容进行编辑（使用markdown工具）:<code>vim blogName.md</code></p>
-<p>3.分别进行清理缓存文件，生成静态文件，就可以在<a href="http://localhost:4000" target="_blank" rel="noopener">http://localhost:4000</a> 进行本地访问</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<h3 id="三、远端部署（使用Github服务器）"><a href="#三、远端部署（使用Github服务器）" class="headerlink" title="三、远端部署（使用Github服务器）"></a>三、远端部署（使用Github服务器）</h3><p>1.安装远端部署工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
-<p>2.找到blog文件夹下的_config.yml文件，对其deploy进行如下编辑</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  	<span class="built_in">type</span>: git</span><br><span class="line">  	repo: https://github.com/Name/Name.github.io.git   <span class="comment">##创建的github的项目工厂地址,Name代表本人的Github账号名称</span></span><br><span class="line">  	branch: master</span><br></pre></td></tr></table></figure>
-<p>3.输入<code>hexo d</code>后进行远端部署，输入Github账号密码后就可以在 <a href="https://Name.github.io" target="_blank" rel="noopener">https://Name.github.io</a> 中进行访问</p>
-<h3 id="四、博客页面的主题风格优化"><a href="#四、博客页面的主题风格优化" class="headerlink" title="四、博客页面的主题风格优化"></a>四、博客页面的主题风格优化</h3><p>1.下载喜欢的主题，例如：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> -b master https://github.com/jerryc127/hexo-theme-butterfly.git  themes/Butterfly</span><br></pre></td></tr></table></figure>
-<p>下载文件自动存入 <code>/blog/themes</code>文件夹下</p>
-<p>2.再次打开blog文件夹下的——config.yml文件，对其中的theme进行编辑：<code>theme: Butterfly</code></p>
-<p>3.依次输入<code>hexo clean</code>，<code>hexo generate</code>，<code>hexo d</code>即可完成远端更改</p>
-<footer>
-<img width="15%" align="left" src="https://avatars1.githubusercontent.com/u/43518332?s=460&u=43b29912e599dbca60bd719359dcbe2a600725cb&v=4">
-<p align="center"> 技术总结于：<i><a href="https://www.bilibili.com/video/av44544186?t=1065" target="_blank" rel="noopener">手把手教你从0开始搭建自己的个人博客 |无坑版视频教程| hexo </a></i></p>
-</footer>
-
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -1030,6 +439,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -1050,8 +463,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1093,6 +515,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构与算法第四讲-单链表（Java）"><span class="nav-number">1.</span> <span class="nav-text">数据结构与算法第四讲 单链表（Java）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单链表"><span class="nav-number">1.1.</span> <span class="nav-text">单链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、基本定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、基本操作"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、深入操作"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、深入操作</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1226,6 +664,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
