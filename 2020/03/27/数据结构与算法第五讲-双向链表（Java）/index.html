@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构DataStructure," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="“双向链表相对于单链表来说，要更复杂一点（多了pre指针），对于插入和删除，需要格外小心。另外由于它由于每个结点都需要记录两份指针，所以在空间上占用略多一点。不过由于它良好的对称性，使得对某个结点的前后操作，带来了方便，可以有效提高算法的时间性能。说白了，就是用空间来换时间。”   (&#x3D;￣ω￣&#x3D;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第五讲 双向链表">
+<meta property="og:url" content="http://easonxys.github.io/2020/03/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%94%E8%AE%B2-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Amazing">
+<meta property="og:description" content="“双向链表相对于单链表来说，要更复杂一点（多了pre指针），对于插入和删除，需要格外小心。另外由于它由于每个结点都需要记录两份指针，所以在空间上占用略多一点。不过由于它良好的对称性，使得对某个结点的前后操作，带来了方便，可以有效提高算法的时间性能。说白了，就是用空间来换时间。”   (&#x3D;￣ω￣&#x3D;)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.itfly.net/uploads/allimg/20171119/1511057441723_0.jpg">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1585305041482&di=a2d9a439e812538f90f6731f1d80aef4&imgtype=0&src=http%253A%252F%252Fimages.cnblogs.com%252Fcnblogs_com%252Fjcsu%252Fdatastructure%252Fds_dllist_insertdelete.gif">
+<meta property="article:published_time" content="2020-03-27T13:01:47.000Z">
+<meta property="article:modified_time" content="2020-03-27T13:20:08.631Z">
+<meta property="article:author" content="Eason">
+<meta property="article:tag" content="数据结构DataStructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.itfly.net/uploads/allimg/20171119/1511057441723_0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://easonxys.github.io/2020/03/27/数据结构与算法第五讲-双向链表（Java）/"/>
+
+
+
+
+
+  <title>数据结构与算法第五讲 双向链表 | Amazing</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Amazing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春有百花秋有月 夏有凉风冬有雪</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/03/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%BA%94%E8%AE%B2-%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/caticon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Amazing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第五讲 双向链表</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-27T21:01:47+08:00">
+                2020-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  728
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>“双向链表相对于单链表来说，要更复杂一点（多了pre指针），对于插入和删除，需要格外小心。另外由于它由于每个结点都需要记录两份指针，所以在空间上占用略多一点。不过由于它良好的对称性，使得对某个结点的前后操作，带来了方便，可以有效提高算法的时间性能。说白了，就是用空间来换时间。”   <strong>(=￣ω￣=)</strong></p>
+<a id="more"></a>
+
+<h4 id="双向链表"><a href="#双向链表" class="headerlink" title="双向链表"></a>双向链表</h4><h5 id="一、基本定义"><a href="#一、基本定义" class="headerlink" title="一、基本定义"></a>一、基本定义</h5><p>双向链表是在单链表的每个结点中，除了后继（next）外再设置一个指向其前驱结点的指针域（pre）。下图为非空的循环的带头结点的双向链表：</p>
+<img src="http://www.itfly.net/uploads/allimg/20171119/1511057441723_0.jpg" alt="链表的创建_双链表的基本操作_双链表教学" style="zoom:50%;">
+
+<h5 id="二、基本操作"><a href="#二、基本操作" class="headerlink" title="二、基本操作"></a>二、基本操作</h5><p>简述双向链表的 遍历、添加、修改、删除</p>
+<p>其中 <strong>遍历</strong>、<strong>修改</strong>与单链表区别不大，不赘述。</p>
+<ol>
+<li><p>a <strong>添加</strong>（默认直接添加至双向链表最后）</p>
+<p>1）先找到双向链表的最后结点 temp</p>
+<p>2）<code>temp.next=newNode</code>            <code>newNode.pre=temp</code></p>
+<p>b <strong>插入</strong></p>
+<p>1)  先通过条件找到双向链表的插入结点位置</p>
+<p>2）<strong>注意: 分辨待插入的双向结点的插入位置，是temp的前面还是后面。如图为temp的前面，记为“前插”</strong></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s.pre=p.pre;</span><br><span class="line">p.pre.next=s;</span><br><span class="line">s.next=p;</span><br><span class="line">p.pre=s;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p><strong>删除</strong></p>
+<p>因为是双向链表，所以可以实现自我删除（无需通过待删结点的前一个结点）</p>
+<p>1）通过条件遍历找到待删结点 temp</p>
+<p>2）<code>temp.pre.next=temp.next</code></p>
+<p>3）<code>temp.next.pre=temp.pre</code>    注意：如果temp是尾结点，不必执行此语句，否则报错空指针</p>
+<p><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1585305041482&di=a2d9a439e812538f90f6731f1d80aef4&imgtype=0&src=http%3A%2F%2Fimages.cnblogs.com%2Fcnblogs_com%2Fjcsu%2Fdatastructure%2Fds_dllist_insertdelete.gif" alt="img"></p>
+</li>
+</ol>
+<h5 id="三、深入操作"><a href="#三、深入操作" class="headerlink" title="三、深入操作"></a>三、深入操作</h5><ol>
+<li><p>双向链表的反转</p>
+<p>1）定义当前结点的下一个结点     <code>temp=cur.next</code></p>
+<p>2）当前结点的后继为 <code>reserveHead</code> 的最新结点，前驱为<code>temp</code> </p>
+<p> <code>cur.next=reserveHead.next            cur.pre=temp</code></p>
+<p>3）当前结点为 <code>reserveHead</code>的最新结点  <code>reserveHead.next=cur</code></p>
+<p>4）更新当前结点  <code>cur=temp</code></p>
+<p>5)   最后将原链表头替代反转链表头</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">reservePrint</span><span class="params">(HeroNode2 head)</span></span>&#123;    <span class="comment">// 类比于单链表的反转，仅增加了 cur.pre=tmp 这个步骤</span></span><br><span class="line">    HeroNode2 cur=head.next;                </span><br><span class="line">    HeroNode2 tmp=<span class="keyword">null</span>;                     </span><br><span class="line">    <span class="keyword">if</span> (head.next==<span class="keyword">null</span>&amp;&amp;head.next.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">    HeroNode2 reHead=<span class="keyword">new</span> HeroNode2(<span class="number">0</span>,<span class="string">""</span>,<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">while</span> (cur!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            tmp=cur.next;</span><br><span class="line">            cur.next=reHead.next;      cur.pre=tmp;    <span class="comment">//########</span></span><br><span class="line">            reHead.next=cur;</span><br><span class="line">            cur=tmp;</span><br><span class="line">        &#125;</span><br><span class="line">    head.next=reHead.next;</span><br><span class="line">    reHead.next.pre=head;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>合并双向的有序链表</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> HeroNode2 <span class="title">unionList</span><span class="params">(HeroNode2 head1,HeroNode2 head2)</span></span>&#123;</span><br><span class="line">    HeroNode2 temp1=head1.next;  HeroNode2 temp2=head2.next;</span><br><span class="line">    HeroNode2 newhead=<span class="keyword">new</span> HeroNode2(<span class="number">0</span>,<span class="string">""</span>,<span class="string">""</span>);</span><br><span class="line">    <span class="keyword">if</span> (head1.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (head2.next==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head1;</span><br><span class="line">    &#125;</span><br><span class="line">    HeroNode2 curr=newhead;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (temp1!=<span class="keyword">null</span> || temp2!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span> (temp1 ==<span class="keyword">null</span> &amp;&amp; temp2 !=<span class="keyword">null</span>)&#123;</span><br><span class="line">            curr.next=temp2;</span><br><span class="line">            temp2.pre=curr;</span><br><span class="line">            curr=temp2;</span><br><span class="line">            temp2=temp2.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (temp1 !=<span class="keyword">null</span> &amp;&amp; temp2 ==<span class="keyword">null</span>)&#123;</span><br><span class="line">            curr.next=temp1;</span><br><span class="line">            temp1.pre=curr;</span><br><span class="line">            curr=temp1;</span><br><span class="line">            temp1=temp1.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (temp1.no&lt;temp2.no)&#123;</span><br><span class="line">                curr.next=temp1;</span><br><span class="line">                temp1.pre=curr;</span><br><span class="line">                curr=temp1;</span><br><span class="line">                temp1=temp1.next;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                curr.next=temp2;</span><br><span class="line">                temp2.pre=curr;</span><br><span class="line">                curr=temp2;</span><br><span class="line">                temp2=temp2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newhead;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84DataStructure/" rel="tag"># 数据结构DataStructure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/03/26/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%9B%9B%E8%AE%B2-%E5%8D%95%E9%93%BE%E8%A1%A8%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第四讲 单链表（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第四讲 单链表（Java）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/caticon.jpg"
+                alt="Eason" />
+            
+              <p class="site-author-name" itemprop="name">Eason</p>
+              <p class="site-description motion-element" itemprop="description">学习备忘录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#双向链表"><span class="nav-number">1.</span> <span class="nav-text">双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本定义"><span class="nav-number">1.1.</span> <span class="nav-text">一、基本定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、基本操作"><span class="nav-number">1.2.</span> <span class="nav-text">二、基本操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、深入操作"><span class="nav-number">1.3.</span> <span class="nav-text">三、深入操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐宇颂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共5.9k字</span>
+</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
