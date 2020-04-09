@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构DataStructure," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="冒泡排序：两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。（优化：当单趟排序没有任何数据交换，说明此序列已经有序，不需要在继续后面的循环判断工作了，可以提早结束排序操作） 简单选择排序：从待排序的数据中，按指定的规则选出来一个元素，在依规定交换位置后达到排序的目的 直接插入排序：将一个记录插入到已经排好序的有序表中，从而得到一个新的、记录数增1的有序表 希尔排序：把记录按下标的一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第十讲 排序一（冒泡、简单选择、直接插入、希尔）（Java）">
+<meta property="og:url" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Amazing">
+<meta property="og:description" content="冒泡排序：两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。（优化：当单趟排序没有任何数据交换，说明此序列已经有序，不需要在继续后面的循环判断工作了，可以提早结束排序操作） 简单选择排序：从待排序的数据中，按指定的规则选出来一个元素，在依规定交换位置后达到排序的目的 直接插入排序：将一个记录插入到已经排好序的有序表中，从而得到一个新的、记录数增1的有序表 希尔排序：把记录按下标的一">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/order1.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/order2.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/bubbleselect1.gif">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/selectionsort.gif">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/straightinsertionsort.gif">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/straightinsertionsort1.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/shellsort2.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/shellsort.gif">
+<meta property="article:published_time" content="2020-04-09T14:11:57.000Z">
+<meta property="article:modified_time" content="2020-04-09T14:41:08.199Z">
+<meta property="article:author" content="Eason">
+<meta property="article:tag" content="数据结构DataStructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/order1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://easonxys.github.io/2020/04/09/数据结构与算法第十讲-排序一（冒泡、简单选择、直接插入、希尔）（Java）/"/>
+
+
+
+
+
+  <title>数据结构与算法第十讲 排序一（冒泡、简单选择、直接插入、希尔）（Java） | Amazing</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Amazing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春有百花秋有月 夏有凉风冬有雪</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/caticon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Amazing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第十讲 排序一（冒泡、简单选择、直接插入、希尔）（Java）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-09T22:11:57+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>冒泡排序</strong>：两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。（优化：当单趟排序没有任何数据交换，说明此序列已经有序，不需要在继续后面的循环判断工作了，可以提早结束排序操作）</p>
+<p><strong>简单选择排序</strong>：从待排序的数据中，按指定的规则选出来一个元素，在依规定交换位置后达到排序的目的</p>
+<p><strong>直接插入排序</strong>：将一个记录插入到已经排好序的有序表中，从而得到一个新的、记录数增1的有序表</p>
+<p><strong>希尔排序</strong>：把记录按下标的一定增量分组，对每组直接插入排序算法排序；随着增量逐渐减少，每组包含的关键字越来越多，当增量减至1时，整个文件恰好被分成一组，算法终止。它是插入排序改进后的更加高效的版本</p>
+<a id="more"></a>
+
+<h4 id="排序一（冒泡、简单选择、直接插入、希尔）"><a href="#排序一（冒泡、简单选择、直接插入、希尔）" class="headerlink" title="排序一（冒泡、简单选择、直接插入、希尔）"></a>排序一（冒泡、简单选择、直接插入、希尔）</h4><h5 id="一、基本定义"><a href="#一、基本定义" class="headerlink" title="一、基本定义"></a>一、基本定义</h5><p>排序也叫排序算法，是将一组数据，依照指定顺序进行排列的过程</p>
+<h5 id="二、基本类型"><a href="#二、基本类型" class="headerlink" title="二、基本类型"></a>二、基本类型</h5><ol>
+<li>内部排序：指将需要处理的所有数据都加载到内部存储器中进行排序</li>
+<li>外部排序：数据量过大时，无法全部加载到内存中，需要借助外部存储（文件）进行排序</li>
+</ol>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/order1.jpg" style="zoom:67%;">
+
+<p>各类排序算法的时间复杂度对比：</p>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/order2.jpg" style="zoom: 80%;">
+
+<hr>
+<h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p>冒泡排序属于内部排序，对待排序序列从前向后（从下标较小的元素开始），依次比较<strong>相邻</strong>元素的值，若发现逆序则交换，使数值较大的元素逐渐从前向后移动，直到没有逆序的记录为止。</p>
+<p>冒泡排序的时间复杂度是<b>O(n<sup>2</sup>)</b>,如果不进行优化，可能会浪费计算时间与资源。</p>
+<p>在排序的过程中，各元素不断接近自己的位置，<strong>如果一趟比较下来没有进行交换，就说明序列已经有序</strong>，因此要在排序过程各种设置一个标志flag判断元素是否进行过交换，从而较少不必要的比较（该优化可以在冒泡操作之后进行操作）。</p>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/bubbleselect1.gif" style="zoom:67%;">
+
+<p>小结：</p>
+<p>（1）一共进行了（<code>bubbleArr.length-1</code>）次循环 ；<code>bubbleArr.length</code>表示冒泡数组的大小</p>
+<p>（2）每一趟排序都是相邻元素的比较交换，且随着较大值的确定，次数在逐渐减少</p>
+<p>（3）<strong>【优化】</strong>如果在某次排序中没有再发生一次交换，可以提前结束冒泡排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  原序数组，此次排序从小到大，冒泡排序的时间复杂度为  O(n^2)</span></span><br><span class="line"><span class="comment">//  以我的Y7000拯救者为例，对一个容量100000的随机数组，冒泡排序用时15s左右</span></span><br><span class="line">    <span class="keyword">int</span>[] bubbleArr=&#123;<span class="number">0</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    System.out.println(<span class="string">"原序数组："</span>+Arrays.toString(bubbleArr));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> temp=<span class="number">0</span>;     <span class="comment">//临时变量</span></span><br><span class="line">    <span class="keyword">boolean</span> flag=<span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">//一共循环（arr.length-1）次</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;bubbleArr.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line"><span class="comment">//   在每次循环中，都会确定一个较大值，所以单次循环中只需要比较交换(bubbleArr.length-1-i)次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;bubbleArr.length-<span class="number">1</span>-i;j++) &#123;</span><br><span class="line"><span class="comment">//            如果前者值大于后者，则交换两者位置</span></span><br><span class="line">            <span class="keyword">if</span> (bubbleArr[j]&gt;bubbleArr[j+<span class="number">1</span>])&#123;</span><br><span class="line">                flag=<span class="keyword">true</span>;              <span class="comment">//如果进行了比较，则flag赋值为true</span></span><br><span class="line">                temp=bubbleArr[j];</span><br><span class="line">                bubbleArr[j]=bubbleArr[j+<span class="number">1</span>];</span><br><span class="line">                bubbleArr[j+<span class="number">1</span>]=temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"><span class="comment">// =====优化代码============================</span></span><br><span class="line">        <span class="comment">//如果在某趟排序中，没有进行一次比较，则默认排序结束，退出循环</span></span><br><span class="line">        <span class="keyword">if</span> (!flag)&#123;</span><br><span class="line">            System.out.println(<span class="string">"最终排序结果："</span>+Arrays.toString(bubbleArr));</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flag=<span class="keyword">false</span>; <span class="comment">//如果没有结束排序，重新赋值，以进入下一次排序</span></span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"第"</span>+(i+<span class="number">1</span>)+<span class="string">"趟排序"</span>+Arrays.toString(bubbleArr));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="简单选择排序"><a href="#简单选择排序" class="headerlink" title="简单选择排序"></a>简单选择排序</h4><p>简单选择排序属于内部排序，是从待排序的数据中，按指定的规则选出来一个元素，在依规定交换位置后达到排序的目的。简单选择排序的时间复杂度是<b>O(n<sup>2</sup>)</b></p>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/selectionsort.gif" style="zoom:67%;">
+
+<p>小结：</p>
+<p>（1）一共进行了（<code>selectArr.length-1</code>）次循环 ；<code>selectArr.length</code>表示简单选择数组的大小</p>
+<p>（2）每一趟排序都是一个循环，循环规则</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2.1 假定当前数为最小数（单向遍历）</span><br><span class="line">2.2 将最小数与其他数进行比较，如果遍历到数组最后没有发现更小数，则假定成立，得到最小数及其下标；</span><br><span class="line">	反之继续遍历直至找到最小数</span><br><span class="line">2.3 当前数与最小数的交换</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法A	这是我的思路（但是我的方法计算时间却比下面的方法大得多，慎用）</span></span><br><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时14s左右</span></span><br><span class="line"><span class="keyword">int</span>[] arr=&#123;<span class="number">6</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">0</span>&#125;;</span><br><span class="line">System.out.println(<span class="string">"原序数组(排序前)："</span>+Arrays.toString(arr));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> temp=<span class="number">0</span>;     <span class="comment">//临时变量</span></span><br><span class="line"><span class="comment">//一共循环（arr.length-1）次</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length-<span class="number">1</span>;i++) &#123;</span><br><span class="line">    <span class="comment">//每次循环从第（i+1）个元素开始，从剩余元素中找最小值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>+i; j &lt; arr.length; j++) &#123;</span><br><span class="line">        <span class="comment">//如果某元素比当前最小值更小，则对调位置更新最小值</span></span><br><span class="line">        <span class="comment">//##########用时多可能在于 最小值与其余值不停比较后直接交换</span></span><br><span class="line">        <span class="keyword">if</span> (arr[i] &gt; arr[j]) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"第"</span>+(i+<span class="number">1</span>)+<span class="string">"趟排序："</span>+Arrays.toString(arr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法B	韩顺平老师的思路（推荐使用）</span></span><br><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，冒泡排序用时2.6s左右</span></span><br><span class="line"><span class="keyword">int</span>[] arr=&#123;<span class="number">6</span>,<span class="number">4</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">0</span>&#125;;</span><br><span class="line">System.out.println(<span class="string">"原序数组(排序前)："</span>+Arrays.toString(arr));</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> temp=<span class="number">0</span>;     <span class="comment">//临时变量</span></span><br><span class="line"><span class="comment">//一共循环（arr.length-1）次</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length-<span class="number">1</span>;i++) &#123;</span><br><span class="line">    <span class="comment">//初始化每趟排序的最小值以及最小值指标</span></span><br><span class="line">    <span class="keyword">int</span> minIndex=i;</span><br><span class="line">    <span class="keyword">int</span> min=arr[i];</span><br><span class="line">    <span class="comment">//每次循环从第（i+1）个元素开始，从剩余元素中找最小值</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>+i; j &lt; arr.length; j++) &#123;</span><br><span class="line">        <span class="comment">//如果某元素比当前最小值更小，记录该元素的位置</span></span><br><span class="line">        <span class="comment">//##########这个方法节省时间在于找到更小值是仅是记录下标而非直接进行交换</span></span><br><span class="line">        <span class="keyword">if</span>(min&gt;arr[j])&#123;</span><br><span class="line">            min=arr[j];</span><br><span class="line">            minIndex=j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    	<span class="comment">//如果当前最小值并非最小，与实际最小值进行交换</span></span><br><span class="line">    	<span class="comment">//##########找到实际最小值的下标后再进行交换显然更节省时间</span></span><br><span class="line">    	<span class="keyword">if</span>(minIndex!=i)&#123;</span><br><span class="line">            arr[minIndex]=arr[i];</span><br><span class="line">            arr[i]=min;</span><br><span class="line">        &#125;</span><br><span class="line">    System.out.println(<span class="string">"第"</span>+(i+<span class="number">1</span>)+<span class="string">"趟排序："</span>+Arrays.toString(arr));    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法A与方法B虽然都可用，但是从运算效率来看，方法B远远优于方法A。</p>
+<p><small>原因在于方法A将当前最小值与之后的元素进行比较，<u>比较后直接交换</u>，则<strong>比较、交换的操作次数一样多</strong></small></p>
+<p><small>而方法B是将当前最小值先存入<code>min</code>变量中，让<code>min</code>与之后的元素进行比较，比较结束后将实际最小值存入<code>min</code>，实际最小值的坐标存入<code>minIndex</code>，<strong>比较结束后再进行交换，交换次数仅有一次</strong></small></p>
+<p>当数组大小较大时，方法B的运算速度要远远高于方法A，这也是为什么 冒泡排序和简单选择排序（方法B）的时间复杂度都是<b>O(n<sup>2</sup>)</b>，运算时间却相差较大。</p>
+<hr>
+<h4 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h4><p>插入排序属于内部排序，是对于待排序的元素以插入的方式找寻该元素的适当位置，以达到排序的目的。基本思想是，把n个待排序的元素看成一个有序表和一个无序表，开始时有序表只包含一个元素，无序表中包含（n-1）个元素，排序过程中每次从无序表中取出一个元素，依次与有序表中元素进行比较，将它插入有序表中的合适位置，使之成为新的有序表。直接插入排序的时间复杂度是<b>O(n<sup>2</sup>)</b></p>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/straightinsertionsort.gif" style="zoom:67%;">
+
+<p>具体步骤推理图：</p>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/straightinsertionsort1.png" style="zoom: 50%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时0.8s左右</span></span><br><span class="line">		<span class="keyword">int</span>[] arr=&#123;<span class="number">6</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> insertVal;</span><br><span class="line">		<span class="comment">//使用i指针从第二个元素一直遍历至数组最后，i指针指向当前元素</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">			<span class="comment">//第一步：判断当前是否需要进行插入排序</span></span><br><span class="line">            <span class="keyword">if</span> (arr[i]&lt;arr[i-<span class="number">1</span>])&#123;</span><br><span class="line">				  <span class="comment">//如果需要进行插入排序，则将当前元素（即插入元素）赋值给insertVal</span></span><br><span class="line">                  insertVal=arr[i];</span><br><span class="line">				<span class="comment">//第二步：从当前位置往前找，寻找插入位置</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j=i;j&gt;=<span class="number">0</span>;j--)&#123;</span><br><span class="line">					<span class="comment">//使用（j-1）找到插入位置</span></span><br><span class="line">                    <span class="keyword">if</span> (j&gt;<span class="number">0</span> &amp;&amp; arr[j-<span class="number">1</span>]&gt;insertVal)&#123;</span><br><span class="line">						<span class="comment">//插入位置元素后移一位</span></span><br><span class="line">                        arr[j]=arr[j-<span class="number">1</span>];</span><br><span class="line">                    &#125;</span><br><span class="line">					<span class="comment">//第三步：完成上一步操作后，会跳入for循环，j--，回到插入位置，</span></span><br><span class="line">					<span class="comment">//此时无法通过上一个的if判断，进入以下的else语句</span></span><br><span class="line">                    <span class="keyword">else</span>&#123;</span><br><span class="line">					<span class="comment">//将插入位置赋值插入元素，完成插入操作后退出第二层for循环，继续下一轮的“插牌”</span></span><br><span class="line">                        arr[j]=insertVal;</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                System.out.println(<span class="string">"第"</span>+i+<span class="string">"趟排序："</span>+Arrays.toString(arr));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">=========================================================================================</span><br><span class="line">第二步、第三步也可以这么写：</span><br><span class="line">            <span class="keyword">int</span> j=i;</span><br><span class="line">            <span class="keyword">while</span> (j-<span class="number">1</span>&gt;=<span class="number">0</span> &amp;&amp; insertVal&lt;arr[j-<span class="number">1</span>])&#123;</span><br><span class="line">                arr[j]=arr[j-<span class="number">1</span>];</span><br><span class="line">                j--;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j]=insertVal;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><p>希尔排序也是一种插入排序，它是直接插入排序经过改进之后的一个 <strong>更加高效的版本</strong>，也称为 <strong>缩小增量排序</strong>。希尔排序是把记录按下标的一定增量分组，对每组直接插入排序算法排序；随着增量逐渐减少，每组包含的关键字越来越多，当增量减至1时，整个文件恰好被分成一组，算法终止。希尔排序的时间复杂度是<b>O(n<sup>2</sup>)</b></p>
+<p>具体图解为：</p>
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/shellsort2.jpg" style="zoom:33%;">
+
+<img src="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/shellsort.gif" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法A：使用交换法达成希尔排序</span></span><br><span class="line"><span class="comment">//我的理解：方法A是根据步长对原数组进行分组，每一趟的排序，就是在各分组中进行“冒泡排序”（组内相邻元素通过比较大小交换位置）</span></span><br><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时7s左右，效率很大程度上受到“直接交换”的影响</span></span><br><span class="line"><span class="keyword">int</span>[] arr=&#123;<span class="number">8</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> temp;</span><br><span class="line"><span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line"><span class="comment">//gap表示增量（步长），每一次的增量都是组长/2，</span></span><br><span class="line"><span class="comment">//共分为gap组，直至划分为一组即增量减为1</span></span><br><span class="line"><span class="comment">//以arr数组为例，初始gap为5，分为5组</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> gap=arr.length/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">//i指针代表即将插入的元素下标，作为每一组比较数据的最后一个元素的下标</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=gap;i&lt;arr.length;i++) &#123;</span><br><span class="line">        <span class="comment">//j指针代表与i同一组的数组元素下标</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j =i - gap; j &gt;= <span class="number">0</span>; j -= gap) &#123;</span><br><span class="line">            <span class="keyword">if</span> (arr[j] &gt; arr[j + gap]) &#123;</span><br><span class="line">                temp = arr[j];</span><br><span class="line">                arr[j] = arr[j + gap];</span><br><span class="line">                arr[j + gap] = temp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"第"</span>+(++count)+<span class="string">"排序："</span>+Arrays.toString(arr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法B：使用移动法达成希尔排序，这才是真正的希尔排序</span></span><br><span class="line"><span class="comment">//我的理解：方法B是根据步长对原数组进行分组，每一趟的排序，就是在各分组中进行“插入排序”</span></span><br><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时0.007s左右，效率非常高</span></span><br><span class="line"><span class="keyword">int</span>[] arr=&#123;<span class="number">8</span>,<span class="number">9</span>,<span class="number">1</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">0</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> insertVal;</span><br><span class="line"><span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> gap=arr.length/<span class="number">2</span>;gap&gt;<span class="number">0</span>;gap/=<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=gap;i&lt;arr.length;i++)&#123;</span><br><span class="line">        <span class="comment">//思路与直接插入排序相同</span></span><br><span class="line">        <span class="keyword">if</span> (arr[i-gap]&gt;arr[i]) &#123;</span><br><span class="line">            insertVal=arr[i];</span><br><span class="line">            <span class="keyword">int</span> j=i;</span><br><span class="line">            <span class="keyword">while</span> (j-gap&gt;=<span class="number">0</span> &amp;&amp; insertVal&lt;arr[j-gap])&#123;</span><br><span class="line">                arr[j]=arr[j-gap];</span><br><span class="line">                j-=gap;</span><br><span class="line">            &#125;</span><br><span class="line">            arr[j]=insertVal;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"第"</span>+(++count)+<span class="string">"趟排序："</span>+Arrays.toString(arr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84DataStructure/" rel="tag"># 数据结构DataStructure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/04/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E4%B9%9D%E8%AE%B2-%E9%80%92%E5%BD%92%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第九讲 递归（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第九讲 递归（Java）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/caticon.jpg"
+                alt="Eason" />
+            
+              <p class="site-author-name" itemprop="name">Eason</p>
+              <p class="site-description motion-element" itemprop="description">学习备忘录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序一（冒泡、简单选择、直接插入、希尔）"><span class="nav-number">1.</span> <span class="nav-text">排序一（冒泡、简单选择、直接插入、希尔）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、基本定义"><span class="nav-number">1.1.</span> <span class="nav-text">一、基本定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、基本类型"><span class="nav-number">1.2.</span> <span class="nav-text">二、基本类型</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序"><span class="nav-number">2.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#简单选择排序"><span class="nav-number">3.</span> <span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#直接插入排序"><span class="nav-number">4.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#希尔排序"><span class="nav-number">5.</span> <span class="nav-text">希尔排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐宇颂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共15.6k字</span>
+</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
