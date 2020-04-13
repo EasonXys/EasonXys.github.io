@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构DataStructure," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="快速排序：通过一趟排序将待排序的数据分割成两个部分，其中一部分的所有数据比另一部分的所有数据都要小，然后再按此方法对这两部分的数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列 归并排序：假设初始序列含有n个数据，则可以看成n个有序的子序列，每个子序列的长度为1，然后两两归并，得到 [n&#x2F;2] ([num]表示不小于num的最小整数)个长度为2或1的有序子序列；再两两归并">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第十一讲 排序二（快速、归并、基数）（Java）">
+<meta property="og:url" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Amazing">
+<meta property="og:description" content="快速排序：通过一趟排序将待排序的数据分割成两个部分，其中一部分的所有数据比另一部分的所有数据都要小，然后再按此方法对这两部分的数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列 归并排序：假设初始序列含有n个数据，则可以看成n个有序的子序列，每个子序列的长度为1，然后两两归并，得到 [n&#x2F;2] ([num]表示不小于num的最小整数)个长度为2或1的有序子序列；再两两归并">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.1.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.2.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.3.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.4.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.5.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.6.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.7.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.8.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort3.jpeg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/mergingsort2.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/mergingsort3.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/mergingsort1.gif">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/radixsort1.gif">
+<meta property="article:published_time" content="2020-04-13T07:05:41.000Z">
+<meta property="article:modified_time" content="2020-04-13T07:30:43.227Z">
+<meta property="article:author" content="Eason">
+<meta property="article:tag" content="数据结构DataStructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.1.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://easonxys.github.io/2020/04/13/数据结构与算法第十一讲-排序二（快速、归并、基数）（Java）/"/>
+
+
+
+
+
+  <title>数据结构与算法第十一讲 排序二（快速、归并、基数）（Java） | Amazing</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Amazing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春有百花秋有月 夏有凉风冬有雪</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/caticon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Amazing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第十一讲 排序二（快速、归并、基数）（Java）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-13T15:05:41+08:00">
+                2020-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/categories/" itemprop="url" rel="index">
+                    <span itemprop="name">categories</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2.3k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>快速排序</strong>：通过一趟排序将待排序的数据分割成两个部分，其中一部分的所有数据比另一部分的所有数据都要小，然后再按此方法对这两部分的数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列</p>
+<p><strong>归并排序</strong>：假设初始序列含有n个数据，则可以看成n个有序的子序列，每个子序列的长度为1，然后两两归并，得到 [n/2] (<small>[num]表示不小于num的最小整数</small>)个长度为2或1的有序子序列；再两两归并……，如此重复，直至得到一个长度为n的有序序列为止</p>
+<p><strong>基数排序</strong>：将所有待比较的数值统一为同样的数位长度，数位较短的数前面补零。然后从低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成后，数列就变成一个有序序列</p>
+<a id="more"></a>
+
+<h4 id="排序二（快速、归并、基数）"><a href="#排序二（快速、归并、基数）" class="headerlink" title="排序二（快速、归并、基数）"></a>排序二（快速、归并、基数）</h4><h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p>快速排序是对冒泡排序的一种改进。基本思想是：通过一趟排序将待排序的数据分割成两个部分，其中一部分的所有数据比另一部分的所有数据都要小，然后再按此方法对这两部分的数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。快速排序的时间复杂度是<b>O(n<sup>2</sup>)</b></p>
+<p>快速排序思路：以数组<code>[6,1,2,7,9,3,4,5,10,8]</code>为例：</p>
+<p>首先在序列中找“基准点”，默认是每个序列的第一元素，此处为6。</p>
+<p>分别从初始序列两端开始探测，首先哨兵j开始出动，直到找到小于6的数停下；接着哨兵i开始移动，直到找到大于6的数停下。</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.1.jpeg" style="zoom: 67%;">
+
+<p>最后哨兵j和哨兵i分别停在5和7的位置，然后进行交换</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.2.jpeg" style="zoom: 67%;">
+
+
+
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.3.jpeg" style="zoom:67%;">
+
+<p>接下来哨兵j和哨兵i继续移动，再次分别在9和4的位置停下来，再次进行互换</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.4.jpeg" style="zoom:67%;">
+
+
+
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.5.jpeg" style="zoom:67%;">
+
+<p>哨兵i和哨兵j依次移动直到相遇，将基础数6与3进行互换</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.6.jpeg" style="zoom:67%;">
+
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.7.jpeg" style="zoom:67%;">
+
+<p>以此完成第一轮“快速排序”。此时以基准点6为分界点，6左边的数都小于6，6右边的数都大于6。</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort2.8.jpeg" style="zoom:67%;">
+
+<p>接下来就是对6左右两边再次进行上述操作直至排序结束</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/quicksort3.jpeg" style="zoom:80%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时15~40ms，效率非常高</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] arr=&#123;<span class="number">6</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">8</span>&#125;;</span><br><span class="line">    quick(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>);</span><br><span class="line">    System.out.println(Arrays.toString(arr));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">quick</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i,j,pivot,temp;</span><br><span class="line">    <span class="comment">//递归终止条件</span></span><br><span class="line">    <span class="keyword">if</span> (left&gt;right)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//设置哨兵i 从左向右移动</span></span><br><span class="line">    i=left;</span><br><span class="line">    <span class="comment">//设置哨兵j 从右向左移动</span></span><br><span class="line">    j=right;</span><br><span class="line">    <span class="comment">//设置监哨</span></span><br><span class="line">    pivot=arr[left];</span><br><span class="line">    <span class="comment">//i,j哨兵相遇前，进行比较互换操作</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;j) &#123;</span><br><span class="line">        <span class="comment">//如果哨兵j大于监哨，j继续左移</span></span><br><span class="line">        <span class="keyword">while</span> (arr[j] &gt;= pivot &amp;&amp; i&lt;j) &#123;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果哨兵i小于监哨，i继续右移</span></span><br><span class="line">        <span class="keyword">while</span> (arr[i] &lt;= pivot &amp;&amp; i&lt;j) &#123;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//在i&lt;j的情况下，如果j小于监哨，i大于监哨</span></span><br><span class="line">        <span class="comment">//将i，j对应的元素值互换</span></span><br><span class="line">        <span class="keyword">if</span> (i&lt;j) &#123;</span><br><span class="line">            temp = arr[i];</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            arr[j] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//当哨兵i与哨兵j相遇后</span></span><br><span class="line">    <span class="comment">//将相遇位置的元素值与监哨互换，从而完成单次操作</span></span><br><span class="line">    arr[left]=arr[i];</span><br><span class="line">    arr[i]=pivot;</span><br><span class="line">    <span class="comment">//先进行向左递归</span></span><br><span class="line">    quick(arr,left,i-<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//然后进行向右递归</span></span><br><span class="line">    quick(arr,j+<span class="number">1</span>,right);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p>归并排序采用经典的 <strong>分治</strong>策略（分治法将问题 分 成一些小的问题然后递归求解，而 治 的阶段则将分的阶段得到的各个答案“修补”在一起，即分而治之）</p>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/mergingsort2.png" style="zoom:33%;">
+
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/mergingsort3.png" style="zoom:33%;">
+
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/mergingsort1.gif" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时15~20ms，效率非常高</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">int</span>[] arr = &#123;<span class="number">6</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">10</span>,<span class="number">8</span>&#125;;</span><br><span class="line"> System.out.println(Arrays.toString(msort(arr,<span class="number">0</span>,arr.length-<span class="number">1</span>)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] msort(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> right)&#123;</span><br><span class="line">    <span class="comment">//当子序列中只有一个元素时(即left==right)结束递归</span></span><br><span class="line">    <span class="keyword">if</span> (left!=right)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">        <span class="comment">//对左侧子序列进行递归排序</span></span><br><span class="line">        msort(arr,left,mid);</span><br><span class="line">        <span class="comment">//对右侧子序列进行递归排序</span></span><br><span class="line">        msort(arr,mid+<span class="number">1</span>,right);</span><br><span class="line">        <span class="comment">//合并有序的子序列</span></span><br><span class="line">        merge(arr,left,mid,right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//合并（将A B两个有序列表合并成一个有序列表）</span></span><br><span class="line"><span class="comment">//left表示A列表的左端；mid表示A列表的右端；right表示B列表的右端</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>[] arr,<span class="keyword">int</span> left,<span class="keyword">int</span> mid,<span class="keyword">int</span> right)</span></span>&#123;</span><br><span class="line"><span class="comment">//i表示A列表的索引</span></span><br><span class="line"><span class="keyword">int</span> i=left;</span><br><span class="line"><span class="comment">//i表示B列表的索引</span></span><br><span class="line"><span class="keyword">int</span> j=mid+<span class="number">1</span>;</span><br><span class="line"><span class="comment">//temp表示临时的存储空间，它的大小由A B列表的大小联合决定</span></span><br><span class="line"><span class="keyword">int</span>[] temp=<span class="keyword">new</span> <span class="keyword">int</span>[right-left+<span class="number">1</span>];</span><br><span class="line"><span class="comment">//t是temp临时存储列表的索引值</span></span><br><span class="line"><span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> (i&lt;=mid &amp;&amp;j&lt;=right) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i] &lt; arr[j]) &#123;</span><br><span class="line">        temp[t] = arr[i];</span><br><span class="line">        i++;            t++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        temp[t] = arr[j];</span><br><span class="line">        j++;            t++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;=mid)&#123;</span><br><span class="line">        temp[t]=arr[i];</span><br><span class="line">        i++;            t++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (j&lt;=right)&#123;</span><br><span class="line">        temp[t]=arr[j];</span><br><span class="line">        j++;            t++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//将排序完毕后的temp列表元素依次存入arr中，完成列表更新</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;temp.length;k++)&#123;</span><br><span class="line">        <span class="comment">//注意这一步</span></span><br><span class="line">        arr[left+k]=temp[k];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><p>基数排序属于“分配式排序”，又称“桶子法”。顾名思义，它是通过键值的各个位的值，将要排序的元素分配到某些“桶”内，达到排序的作用。</p>
+<p>基数排序的基本思想：</p>
+<p>将所有待比较的数值统一为同样的数位长度，数位较短的数前面补零。然后从低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成后，数列就变成一个有序序列</p>
+<p>基数排序的其他说明：</p>
+<ol>
+<li><p>基数排序是对传统桶排序的扩展，速度很快</p>
+</li>
+<li><p><strong>基数排序是经典的空间换时间的方式</strong>，占用内存很大，当对海量数据排序时，容易造成 OutOfMemoryError 内存溢出错误</p>
+</li>
+<li><p>基数排序是稳定的。</p>
+</li>
+<li><p>如果数组中含有负数，不使用基数排序进行排序</p>
+<p><strong>假定在排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，r[i]=r[j]，且r[i]在r[j]之前，而在排序后的序列中，r[i]仍在r[j]之前，则称这种排序算法是稳定的；否则称为不稳定</strong></p>
+</li>
+</ol>
+<img src="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/radixsort1.gif" style="zoom: 50%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以我的Y7000拯救者为例，对一个容量100000的随机数组，排序用时10~30ms，效率非常高</span></span><br><span class="line"><span class="keyword">int</span>[] arr=&#123;<span class="number">50</span>, <span class="number">123</span>, <span class="number">543</span>, <span class="number">187</span>, <span class="number">49</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">11</span>, <span class="number">100</span>&#125;;</span><br><span class="line"><span class="comment">//bucket是用二维数组表示10个桶，为了防止溢出，每个桶的容量都是arr.length</span></span><br><span class="line"><span class="keyword">int</span>[][] bucket=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>][arr.length];</span><br><span class="line"><span class="comment">//bucketElement表示每个桶的含有元素的个数，由于有10个桶，所以使用一维数组进行同时表示</span></span><br><span class="line"><span class="comment">//bucketElementCount[0]表示的就是bucket[0]桶放入元素的个数</span></span><br><span class="line"><span class="keyword">int</span>[] bucketElementCount=<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>];</span><br><span class="line"><span class="comment">//寻找序列中的最大数</span></span><br><span class="line"><span class="keyword">int</span> max=arr[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line">    <span class="keyword">if</span> (max&lt;arr[i])&#123;</span><br><span class="line">        max=arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//maxLength表示最大数的位数,位数决定了序的次数</span></span><br><span class="line"><span class="keyword">int</span> maxLength=(<span class="string">""</span>+max).length();</span><br><span class="line"><span class="comment">//n用于取位数,</span></span><br><span class="line"><span class="comment">// 第一次排序取个位，arr[i]/1%10;</span></span><br><span class="line"><span class="comment">// 第二次排序取十位，arr[i]/(1*10)%10</span></span><br><span class="line"><span class="comment">// 第三次排序取百位，arr[i]/(1*10*10)%10</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> sortnum=<span class="number">0</span>,n=<span class="number">1</span>;sortnum&lt;maxLength;sortnum++,n*=<span class="number">10</span>) &#123;</span><br><span class="line">    <span class="comment">//i表示原序列的索引</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">        <span class="comment">//temp对原序列取模表示各个排序阶段要获取的位数</span></span><br><span class="line">        <span class="keyword">int</span> digit = (arr[i]/n) % <span class="number">10</span>;</span><br><span class="line">        <span class="comment">//放入相应的桶中，并做好各桶元素统计</span></span><br><span class="line">        bucket[digit][bucketElementCount[digit]] = arr[i];</span><br><span class="line">        bucketElementCount[digit]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//还原原序列的索引</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//按照桶的顺序陆续取出桶中元素并放入原序列</span></span><br><span class="line">    <span class="comment">//j表示10个桶的编号，从0~9</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">10</span>; j++) &#123;</span><br><span class="line">        <span class="comment">//只有桶中有元素，才进行取操作</span></span><br><span class="line">        <span class="keyword">if</span> (bucketElementCount[j] != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">//桶中元素个数的信息存在bucketElementCount中</span></span><br><span class="line">            <span class="comment">//使用l遍历bucketElementCount，从而取出各桶元素</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>; l &lt; bucketElementCount[j]; l++) &#123;</span><br><span class="line">                arr[i] = bucket[j][l];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//取出后需要对bucketElementCount数组清零，用于下一轮基数排序</span></span><br><span class="line">        bucketElementCount[j] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"第"</span>+(sortnum+<span class="number">1</span>)+<span class="string">"次排序："</span>+Arrays.toString(arr));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>趣味演示：</p>
+<p><a href="https://www.bilibili.com/video/av17004846/?spm_id_from=333.788.b_636f6d6d656e74.6" target="_blank" rel="noopener">冒泡排序</a><a href="https://www.bilibili.com/video/av17004884/?spm_id_from=333.788.b_636f6d6d656e74.5" target="_blank" rel="noopener">简单选择排序</a></p>
+<p><a href="https://www.bilibili.com/video/av17004913/?spm_id_from=333.788.b_636f6d6d656e74.8" target="_blank" rel="noopener">直接插入排序</a></p>
+<p><a href="https://www.bilibili.com/video/av17004970/?spm_id_from=333.788.b_636f6d6d656e74.9" target="_blank" rel="noopener">希尔排序</a></p>
+<p><a href="https://www.bilibili.com/video/av17004952/?spm_id_from=333.788.b_636f6d6d656e74.7" target="_blank" rel="noopener">快速排序</a></p>
+<p><a href="https://www.bilibili.com/video/av17004931/?spm_id_from=333.788.b_636f6d6d656e74.10" target="_blank" rel="noopener">归并排序</a></p>
+<p><a href="https://www.bilibili.com/video/av32877402/?spm_id_from=333.788.b_636f6d6d656e74.11" target="_blank" rel="noopener">堆排序</a></p>
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84DataStructure/" rel="tag"># 数据结构DataStructure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第十讲 排序一（冒泡、简单选择、直接插入、希尔）（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第十讲 排序一（冒泡、简单选择、直接插入、希尔）（Java）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/caticon.jpg"
+                alt="Eason" />
+            
+              <p class="site-author-name" itemprop="name">Eason</p>
+              <p class="site-description motion-element" itemprop="description">学习备忘录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序二（快速、归并、基数）"><span class="nav-number">1.</span> <span class="nav-text">排序二（快速、归并、基数）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">2.</span> <span class="nav-text">快速排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">3.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基数排序"><span class="nav-number">4.</span> <span class="nav-text">基数排序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐宇颂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共17.8k字</span>
+</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
