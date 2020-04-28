@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构DataStructure," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="树结构基础部分：树结构与分类、二叉树遍历、二叉树查找、二叉树删除、顺序存储二叉树、线索二叉树、遍历线索二叉树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第十四讲-树结构基础部分（Java）">
+<meta property="og:url" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Amazing">
+<meta property="og:description" content="树结构基础部分：树结构与分类、二叉树遍历、二叉树查找、二叉树删除、顺序存储二叉树、线索二叉树、遍历线索二叉树">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/tree1.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%A1%BA%E5%BA%8F%E5%AD%98%E5%82%A81.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/%E7%BA%BF%E7%B4%A2%E5%8C%96%E7%BB%93%E7%82%B9.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/%E4%B8%AD%E5%BA%8F%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%911.png">
+<meta property="article:published_time" content="2020-04-28T06:13:35.000Z">
+<meta property="article:modified_time" content="2020-04-28T06:32:35.162Z">
+<meta property="article:author" content="Eason">
+<meta property="article:tag" content="数据结构DataStructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/tree1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://easonxys.github.io/2020/04/28/数据结构与算法第十四讲-树结构基础部分（Java）/"/>
+
+
+
+
+
+  <title>数据结构与算法第十四讲-树结构基础部分（Java） | Amazing</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Amazing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春有百花秋有月 夏有凉风冬有雪</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/caticon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Amazing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第十四讲-树结构基础部分（Java）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-28T14:13:35+08:00">
+                2020-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>树结构基础部分：树结构与分类、二叉树遍历、二叉树查找、二叉树删除、顺序存储二叉树、线索二叉树、遍历线索二叉树</p>
+<a id="more"></a>
+
+<h4 id="树结构基础部分"><a href="#树结构基础部分" class="headerlink" title="树结构基础部分"></a>树结构基础部分</h4><h5 id="一、存储方式分析"><a href="#一、存储方式分析" class="headerlink" title="一、存储方式分析"></a>一、存储方式分析</h5><ul>
+<li><p>数组存储方式的分析（<u>增删效率低</u>）</p>
+<ul>
+<li><p>优点：通过下标方式访问元素，速度快。对于有序数组，还可以使用二分查找提高检索速度；无须为表示表中元素之间的逻辑关系增加额外的存储空间</p>
+</li>
+<li><p>缺点：如果要检索具体某个值，或者插入值（按一定顺序）会整体移动，效率降低；当数组长度变化较大时，难以确定存储空间的容量；造成存储空间的“碎片”</p>
+</li>
+<li><p>链式存储方式的分析（<u>改查效率低</u>）</p>
+<ul>
+<li>优点：在一定程度上对数组存储方式有优化（比如：插入一个数值结点，只需要将插入结点链接到链表中即可，不需要整体移动，同理删除效率也很高）</li>
+<li>缺点：在进行检索时，效率仍然较低（比如：检索某个值，需要从头节点开始遍历）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>树存储方式的分析</p>
+<p>能提高数据 <strong>存储、读取</strong>的效率，比如利用二叉排序树，既可以保证数据的检索速度，同时也可以保证数据的插入、删除、修改的速度</p>
+</li>
+</ul>
+<h5 id="二、树的基础介绍"><a href="#二、树的基础介绍" class="headerlink" title="二、树的基础介绍"></a>二、树的基础介绍</h5><p>树的逻辑结构图</p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/tree1.png" style="zoom:67%;">
+
+<p><strong>二叉树</strong>：每个结点<u>最多只能有两个子结点</u>的树称为二叉树，二叉树的子结点分为左结点和右结点</p>
+<p><strong>满二叉树</strong>：如果该二叉树的所有叶子结点都在最后一层，并且 结点总数=2<sup>n</sup>-1，n为层数，则称为满二叉树</p>
+<p><strong>完全二叉树</strong>：如果该二叉树的所有叶子结点都在最后一层或者倒数第二层，而且最后一层的叶子结点在左边连续，倒数第二层的叶子结点在右边连续，则称为完全二叉树</p>
+<h5 id="三、二叉树遍历说明"><a href="#三、二叉树遍历说明" class="headerlink" title="三、二叉树遍历说明"></a>三、二叉树遍历说明</h5><p><strong>前序遍历</strong>（父左右）：<u>先输出父结点</u>，再遍历左子树和右子树</p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/前序遍历.jpg" style="zoom:67%;">
+
+<p><strong>中序遍历</strong>（左父右）：先遍历左子树，<u>再输出父结点</u>，再遍历右子树</p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/中序遍历.jpg" style="zoom:67%;">
+
+<p><strong>后序遍历</strong>（左右父）：先遍历左子树，再遍历右子树，<u>最后输出父结点</u></p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/后序遍历.jpg" style="zoom:67%;">
+
+<p>具体思路说明：</p>
+<ul>
+<li><p>首先创建一棵二叉树</p>
+</li>
+<li><p>前序遍历</p>
+<ol>
+<li>先输出当前结点</li>
+<li>如果左子结点不为空，则递归继续前序遍历</li>
+<li>如果右子结点不为空，则递归继续前序遍历</li>
+</ol>
+<ul>
+<li><p>中序遍历</p>
+<ol>
+<li>如果当前结点的左子结点不为空，则递归中序遍历</li>
+<li>输出当前结点</li>
+<li>如果当前结点的右子结点不为空，则递归中序遍历</li>
+</ol>
+</li>
+<li><p>后序遍历</p>
+<ol>
+<li><p>如果当前结点的左子结点不为空，则递归后序遍历</p>
+</li>
+<li><p>如果当前结点的右子结点不为空，则递归后序遍历</p>
+</li>
+<li><p>输出当前结点</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>实现主类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BinaryTreeTraverse</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Node rootA=<span class="keyword">new</span> Node(<span class="string">"A"</span>);     Node nB=<span class="keyword">new</span> Node(<span class="string">"B"</span>);</span><br><span class="line">        Node nC=<span class="keyword">new</span> Node(<span class="string">"C"</span>);        Node nD=<span class="keyword">new</span> Node(<span class="string">"D"</span>);</span><br><span class="line">        Node nE=<span class="keyword">new</span> Node(<span class="string">"E"</span>);        Node nF=<span class="keyword">new</span> Node(<span class="string">"F"</span>);</span><br><span class="line">        Node nG=<span class="keyword">new</span> Node(<span class="string">"G"</span>);        Node nH=<span class="keyword">new</span> Node(<span class="string">"H"</span>);</span><br><span class="line">        Node nI=<span class="keyword">new</span> Node(<span class="string">"I"</span>);</span><br><span class="line">        <span class="comment">//创建一棵二叉树</span></span><br><span class="line">        binaryTree tree=<span class="keyword">new</span> binaryTree();</span><br><span class="line">        tree.setRoot(rootA);</span><br><span class="line"></span><br><span class="line">        rootA.setLeft(nB);        rootA.setRight(nC);</span><br><span class="line">        nB.setLeft(nD);</span><br><span class="line">        nD.setLeft(nG);        nD.setRight(nH);</span><br><span class="line">        nC.setLeft(nE);        nC.setRight(nF);</span><br><span class="line">        nE.setRight(nI);</span><br><span class="line">        <span class="comment">//二叉树的遍历</span></span><br><span class="line">        tree.preTraverse();</span><br><span class="line">        tree.infixTraverse();</span><br><span class="line">        tree.postTraverse();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>二叉树类</strong>（与哈希表类似，具体的二叉树的操作是通过调用结点的操作方法完成的）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">binaryTree</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Node root;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRoot</span><span class="params">(Node root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.root = root;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preTraverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"前序遍历"</span>);</span><br><span class="line">            <span class="keyword">this</span>.root.preTraverse();</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"二叉树为空，无法遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">infixTraverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"中序遍历"</span>);</span><br><span class="line">            <span class="keyword">this</span>.root.indfixTraverse();</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"二叉树为空，无法遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postTraverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.root!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"后序遍历"</span>);</span><br><span class="line">            <span class="keyword">this</span>.root.postTraverse();</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"二叉树为空，无法遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结点类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String value;</span><br><span class="line">    <span class="keyword">private</span> Node left;</span><br><span class="line">    <span class="keyword">private</span> Node right;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLeft</span><span class="params">(Node left)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.left = left;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRight</span><span class="params">(Node right)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.right = right;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Node</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.value=value;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//重构toString函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value+<span class="string">" "</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//编写前序遍历方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preTraverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//首先输出父结点</span></span><br><span class="line">        System.out.print(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//递归左子树递归遍历</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.preTraverse();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//递归右子树递归遍历</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.preTraverse();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//编写中序遍历方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">indfixTraverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//递归左子树中序遍历</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.indfixTraverse();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//输出父结点</span></span><br><span class="line">        System.out.print(<span class="keyword">this</span>);</span><br><span class="line">        <span class="comment">//递归右子树中序遍历</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.indfixTraverse();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//编写后序遍历方法(同理)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postTraverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.left.postTraverse();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.right.postTraverse();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="四、二叉树查找"><a href="#四、二叉树查找" class="headerlink" title="四、二叉树查找"></a>四、二叉树查找</h5><p>要求：</p>
+<ol>
+<li>编写前序查找、中序查找、后序查找的方法</li>
+<li>分别使用三种查找方法，查找特定结点</li>
+<li>分析各种查找方式，分别比较了多少次</li>
+</ol>
+<p>思路：</p>
+<ul>
+<li><p>前序查找</p>
+<ol>
+<li>先判断当前结点是否为查找结点，如果是，则返回此结点</li>
+<li>如果不是，则判断左子结点是否为空，如果不为空，则继续递归前序查找；如果左递归前序查找，找到结点，则返回该结点</li>
+<li>如果左递归前序查找并无找到，则继续判断当前结点的右结点是否为空，如果不为空，则继续向右递归前序查找，直到返回查找结点</li>
+<li>如果仍未找到，则返回null，此二叉树并无查找结点</li>
+</ol>
+<ul>
+<li><p>中序查找（以此类推）</p>
+</li>
+<li><p>后序查找（以此类推）</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">binaryTree</span></span>&#123;</span><br><span class="line">    <span class="comment">//树的前序查找操作</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preSearch</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.root==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"二叉树为空，无法查找"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        Node ns=<span class="keyword">this</span>.root.preSearch(value);</span><br><span class="line">        <span class="keyword">if</span> (ns==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"此二叉树不存在value为%s的结点\n"</span>,value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.printf(<span class="string">"前序查找value为%s的结点\n"</span>,value);</span><br><span class="line">            System.out.println(ns);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//树的中序查找</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">infixSearch</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">        Node ns=<span class="keyword">this</span>.root.infixSearch(value);</span><br><span class="line">        <span class="keyword">if</span> (ns==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"此二叉树不存在value为%s的结点\n"</span>,value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.printf(<span class="string">"中序查找value为%s的结点\n"</span>,value);</span><br><span class="line">            System.out.println(ns);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//树的后序查找    </span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">postSearch</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">        Node ns=<span class="keyword">this</span>.root.postSearch(value);</span><br><span class="line">        <span class="keyword">if</span> (ns==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"此二叉树不存在value为%s的结点\n"</span>, value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.printf(<span class="string">"后序查找value为%s的结点\n"</span>,value);</span><br><span class="line">            System.out.println(ns);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结点的前序查找操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">preSearch</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">    <span class="comment">//比较当前结点是否为查找结点</span></span><br><span class="line">    System.out.println(<span class="string">"前序查找"</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.value==value)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果当前结点不是查找结点，初始化resnode为null</span></span><br><span class="line">    <span class="comment">//判断当前结点的左子结点是否为空，如果不为空，则递归前序查找</span></span><br><span class="line">    <span class="comment">//如果左递归前序查找，找到结点，通过赋值resnode并返回</span></span><br><span class="line">    Node resnode=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        resnode=<span class="keyword">this</span>.left.preSearch(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (resnode!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> resnode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果左递归前序查找没有找到，判断当前结点的右子结点是否为空</span></span><br><span class="line">    <span class="comment">//如果不为空，则继续右递归前序查找</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        resnode= <span class="keyword">this</span>.right.preSearch(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果仍查找不到，返回resnode，resnode保留为null</span></span><br><span class="line">    <span class="keyword">return</span> resnode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结点的中序查找操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">infixSearch</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">    Node ns=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        ns=<span class="keyword">this</span>.left.infixSearch(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ns!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ns;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"中序查找"</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.value==value)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        ns=<span class="keyword">this</span>.right.infixSearch(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ns;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//结点的后序查找操作</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Node <span class="title">postSearch</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">    Node ns=<span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        ns=<span class="keyword">this</span>.left.postSearch(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ns!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ns;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        ns=<span class="keyword">this</span>.right.postSearch(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (ns!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> ns;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(<span class="string">"后序查找"</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.value==value)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ns;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="五、二叉树删除"><a href="#五、二叉树删除" class="headerlink" title="五、二叉树删除"></a>五、二叉树删除</h5><p>要求：</p>
+<ol>
+<li><p>如果删除的结点是叶子结点，则直接删除该结点</p>
+</li>
+<li><p><u>如果删除的是非叶子结点，则删除该子树</u></p>
+</li>
+</ol>
+<p>思路：</p>
+<p><strong>由于此处的二叉树是单向的，所以进行删除操作时，应当是判断当前结点的子结点是否要删除而非当前结点是否要删除</strong></p>
+<ol>
+<li><p>首先考虑如果树是空树，root=null；或者树只有root一个结点，则等价将二叉树树置空</p>
+</li>
+<li><p>如果当前结点的左子结点不为空，并且左子结点就是删除结点，则<code>this.left=null;</code>并且立即返回，结束操作</p>
+</li>
+<li><p>如果当前结点的右子结点不为空，并且右子结点就是删除结点，，则<code>this.right=null;</code>并且立即返回，结束操作</p>
+</li>
+<li><p>如果第2，第3步仍未删除结点，那么就需要向左子树进行递归删除</p>
+</li>
+<li><p>如果左递归删除没有删除结点，那么就向右子树进行递归删除</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">binaryTree</span></span>&#123;</span><br><span class="line">    <span class="comment">//树的删除操作</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">        Node nd=<span class="keyword">this</span>.root.preSearch(value);</span><br><span class="line">        <span class="keyword">if</span> (nd==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.printf(<span class="string">"不存在value为%s的结点，无从删除\n"</span>,value);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.root==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"当前二叉树为空，无法进行删除操作"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.root.getValue()==value)&#123;</span><br><span class="line">            System.out.println(<span class="string">"当前二叉树的根结点就是待删除结点，直接置空"</span>);</span><br><span class="line">            <span class="keyword">this</span>.root=<span class="keyword">null</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.root.delNode(value);</span><br><span class="line">            System.out.printf(<span class="string">"成功删除value为%s的结点\n"</span>,value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除结点</span></span><br><span class="line"><span class="comment">// 如果待删除结点是叶子结点，则删除该叶子结点；</span></span><br><span class="line"><span class="comment">// 如果为非叶子结点，则删除以该结点为根的子树</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delNode</span><span class="params">(String value)</span></span>&#123;</span><br><span class="line">    <span class="comment">//如果左子结点不为空，且左子结点为待删除结点</span></span><br><span class="line">    <span class="comment">//则将当前结点的左子结点置空并且结束递归</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span> &amp;&amp; <span class="keyword">this</span>.left.value==value)&#123;</span><br><span class="line">        <span class="keyword">this</span>.left=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果右子结点不为空，且右子结点为待删除结点</span></span><br><span class="line">    <span class="comment">//则将当前结点的右子结点置空并且结束递归</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span> &amp;&amp; <span class="keyword">this</span>.right.value==value)&#123;</span><br><span class="line">        <span class="keyword">this</span>.right=<span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果当前结点的左子结点不为空</span></span><br><span class="line">    <span class="comment">//向左递归进行删除</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.left!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.left.delNode(value);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果当前结点的右子结点不为空</span></span><br><span class="line">    <span class="comment">//向右递归进行删除</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.right!=<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.right.delNode(value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="六、顺序存储二叉树"><a href="#六、顺序存储二叉树" class="headerlink" title="六、顺序存储二叉树"></a>六、顺序存储二叉树</h5><p>从数据存储来看，数组存储方式和树存储方式可以互相转换。</p>
+<p>所谓的顺序存储二叉树是指，存储的物理结构为数组结构，但是仍可进行前序、中序、后序遍历。</p>
+<p>顺序存储二叉树的特点（如下图所示）：</p>
+<ol>
+<li>通常只考虑完全二叉树</li>
+<li>第n个元素的左子结点为 第(2n+1)个元素</li>
+<li>第n个元素的右子结点为 第(2n+2)个元素</li>
+<li>第n个元素的父结点 第 (n-1)/2 个元素</li>
+</ol>
+<p>n：表示二叉树中第几个元素（按0开始编号）</p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/二叉树顺序存储1.png" style="zoom:67%;">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以顺序存储二叉树的前序遍历为例</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ArrayBinaryTree</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] arr=&#123;<span class="string">"A"</span>,<span class="string">"B"</span>,<span class="string">"C"</span>,<span class="string">"D"</span>,<span class="string">"E"</span>,<span class="string">"F"</span>,<span class="string">"G"</span>,<span class="string">"H"</span>,<span class="string">"I"</span>&#125;;</span><br><span class="line">        ArrBinaryTree atree=<span class="keyword">new</span> ArrBinaryTree(arr);</span><br><span class="line">        atree.preOrder();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ArrBinaryTree</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String[] arr;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ArrBinaryTree</span><span class="params">(String[] arr)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.arr=arr;</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//重构前序遍历，使主类代码更加简洁</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"前序遍历"</span>);</span><br><span class="line">		<span class="comment">//0表示数组中的第一个元素，也就是二叉树的根节点</span></span><br><span class="line">        <span class="keyword">this</span>.preOrder(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">//index表示数组下标，也就是示意图中的n</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">preOrder</span><span class="params">(<span class="keyword">int</span> index)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (arr.length==<span class="number">0</span> || arr==<span class="keyword">null</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"数组为空，无法进行顺序存储二叉树的前序遍历"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.print(arr[index]+<span class="string">"\t"</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">2</span>*index+<span class="number">1</span>&lt;arr.length)&#123;</span><br><span class="line">            preOrder(<span class="number">2</span>*index+<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">2</span>*index+<span class="number">2</span>&lt;arr.length)&#123;</span><br><span class="line">            preOrder(<span class="number">2</span>*index+<span class="number">2</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="七、线索二叉树"><a href="#七、线索二叉树" class="headerlink" title="七、线索二叉树"></a>七、线索二叉树</h5><p>n个结点的二叉链表中含有 n+1个空指针域 <code>2n-(n-1)=n+1</code>，利用二叉链表中的空指针域，存放指向该结点在某种遍历次序下的前驱和后继结点的指针（这种附加的指针称为“线索”）</p>
+<p>这种加上了线索的二叉链表称为 线索链表，相应的二叉树称为线索二叉树。根据线索性质的不同，线索二叉树可分为 前序线索二叉树、中序线索二叉树 和 后序线索二叉树三种</p>
+<p>其实线索二叉树，就是根据遍历顺序将一颗二叉树变成一个双向链表，这样充分利用了空指针，对插入删除结点、查找结点带来方便。所以对二叉树以某种次序遍历使其变为线索二叉树的过程称为 线索化。</p>
+<p><small>一个结点的前一个结点，称为前驱结点；一个结点的后一个结点，称为后继结点</small></p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/线索化结点.png" style="zoom:33%;">
+
+<p>规定除了结点本身就带有的 left 和 right 左右指针，增加 ltag 和 rtag两个标志域</p>
+<p>当 ltag 为0时，left指向该结点的左子结点，为1时指向该结点的前驱；</p>
+<p>当 rtag 为0时，right指向该结点的右子结点，为1时指向该结点的后继</p>
+<img src="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/中序线索二叉树1.png" style="zoom:67%;">
+
+<p><strong>说明</strong>：当线索化二叉树后，Node结点的属性left和right，有如下情况：</p>
+<ul>
+<li><p>left指向的是左子树，也可能是指向前驱结点</p>
+</li>
+<li><p>right指向的是右子树，也可能是指向后继结点</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">	<span class="comment">//中序线索化二叉树</span></span><br><span class="line"><span class="comment">//编写对二叉树进行中序线索化的方法，node表示当前结点</span></span><br><span class="line"><span class="comment">//如果此时node为null，则可表示上一阶段已经遍历完一颗子树，接下来是回溯到父结点</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">infixThreadedNodes</span><span class="params">(Node node)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (node==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//线索化左子树</span></span><br><span class="line">    infixThreadedNodes(node.getLeft());</span><br><span class="line">    <span class="comment">//线索化当前结点</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果当前结点左子结点为空</span></span><br><span class="line">    <span class="keyword">if</span> (node.getLeft()==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//则让当前结点的左指针指向前驱结点</span></span><br><span class="line">        node.setLeft(pre);</span><br><span class="line">        <span class="comment">//同时更改Ltag为1（当前结点的左指针指向前驱结点）</span></span><br><span class="line">        node.setLtag(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 线索化的难点在于，当前结点的后继结点为父结点，而父结点无法直接使用</span></span><br><span class="line">    <span class="comment">// 就要利用返回上层递归（回溯），使这一阶段的当前结点node为上述父结点，</span></span><br><span class="line">    <span class="comment">// 而通过上阶段pre=node的操作，pre此时为上一阶段的当前结点，如此完成后继操作</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果前驱不为空，且前驱没有右子结点</span></span><br><span class="line">    <span class="keyword">if</span> (pre!=<span class="keyword">null</span> &amp;&amp; pre.getRight()==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="comment">//让前驱结点的右指针指向当前结点</span></span><br><span class="line">        pre.setRight(node);</span><br><span class="line">        <span class="comment">//同时更改Rtag为1</span></span><br><span class="line">        pre.setRtag(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//每处理一个结点后，让当前结点成为下一个结点的前驱结点</span></span><br><span class="line">    pre=node;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//线索化右子树</span></span><br><span class="line">    infixThreadedNodes(node.getRight());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h5 id="八、遍历线索二叉树"><a href="#八、遍历线索二叉树" class="headerlink" title="八、遍历线索二叉树"></a>八、遍历线索二叉树</h5><p>线索化后，各个结点指向有变化，因此原来的遍历方式不能使用，此时需要使用新的方式遍历线索化后的二叉树，各个结点可以通过线型方式遍历，因此无需使用递归方式，这样也提高了遍历效率，遍历的次序也应当与线索化次序保持一致。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">    <span class="comment">//线索化后的中序遍历</span></span><br><span class="line"><span class="comment">//    2. 中序线索化二叉树的网上相关介绍最多。中序遍历的顺序是：左根右，</span></span><br><span class="line"><span class="comment">//    因此第一个节点一定是最左子节点，先找到最左子节点，</span></span><br><span class="line"><span class="comment">//    依次沿着right指针指向进行处理（无论是指向子节点还是指向后继节点），</span></span><br><span class="line"><span class="comment">//    直到节点的right指针为空，说明是最后一个，遍历完成。</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">infixThreadedList</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Node node=root;</span><br><span class="line">        System.out.println(<span class="string">"线索化后的中序遍历（非递归）"</span>);</span><br><span class="line">        <span class="keyword">while</span> (node!=<span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="comment">//遍历找到 ltag=1 的结点</span></span><br><span class="line">            <span class="comment">//第一次小循环找到中序遍历的始发结点</span></span><br><span class="line">            <span class="keyword">while</span> (node.getLtag() == <span class="number">0</span>) &#123;</span><br><span class="line">                node = node.getLeft();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//打印当前结点</span></span><br><span class="line">            System.out.print(node);</span><br><span class="line">            <span class="comment">//如果当前结点右指针直接指向后继结点，就循序遍历输出</span></span><br><span class="line">            <span class="keyword">while</span> (node.getRtag() == <span class="number">1</span>) &#123;</span><br><span class="line">                node = node.getRight();</span><br><span class="line">                System.out.print(node);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//替换这个遍历的结点</span></span><br><span class="line">            node = node.getRight();</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84DataStructure/" rel="tag"># 数据结构DataStructure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AE%B2-%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第十三讲 哈希表（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第十三讲 哈希表（Java）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/caticon.jpg"
+                alt="Eason" />
+            
+              <p class="site-author-name" itemprop="name">Eason</p>
+              <p class="site-description motion-element" itemprop="description">学习备忘录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#树结构基础部分"><span class="nav-number">1.</span> <span class="nav-text">树结构基础部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、存储方式分析"><span class="nav-number">1.1.</span> <span class="nav-text">一、存储方式分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、树的基础介绍"><span class="nav-number">1.2.</span> <span class="nav-text">二、树的基础介绍</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、二叉树遍历说明"><span class="nav-number">1.3.</span> <span class="nav-text">三、二叉树遍历说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、二叉树查找"><span class="nav-number">1.4.</span> <span class="nav-text">四、二叉树查找</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五、二叉树删除"><span class="nav-number">1.5.</span> <span class="nav-text">五、二叉树删除</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#六、顺序存储二叉树"><span class="nav-number">1.6.</span> <span class="nav-text">六、顺序存储二叉树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#七、线索二叉树"><span class="nav-number">1.7.</span> <span class="nav-text">七、线索二叉树</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#八、遍历线索二叉树"><span class="nav-number">1.8.</span> <span class="nav-text">八、遍历线索二叉树</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐宇颂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共25.5k字</span>
+</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
