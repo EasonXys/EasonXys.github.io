@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构DataStructure," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="图形结构是一种比树形结构更复杂的非线性结构。在树形结构中，结点间具有分支层次关系，每一层上的结点只能和上一层中的至多一个结点相关，但可能和下一层的多个结点相关。而在图形结构中，任意两个结点之间都可能相关，即结点之间的邻接关系可以是任意的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法第十六讲-图结构（Java）">
+<meta property="og:url" content="http://easonxys.github.io/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/index.html">
+<meta property="og:site_name" content="Amazing">
+<meta property="og:description" content="图形结构是一种比树形结构更复杂的非线性结构。在树形结构中，结点间具有分支层次关系，每一层上的结点只能和上一层中的至多一个结点相关，但可能和下一层的多个结点相关。而在图形结构中，任意两个结点之间都可能相关，即结点之间的邻接关系可以是任意的。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://easonxys.github.io/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B51.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/%E9%82%BB%E6%8E%A5%E8%A1%A81.png">
+<meta property="article:published_time" content="2020-05-12T03:05:20.000Z">
+<meta property="article:modified_time" content="2020-05-12T03:09:44.946Z">
+<meta property="article:author" content="Eason">
+<meta property="article:tag" content="数据结构DataStructure">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://easonxys.github.io/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/%E9%82%BB%E6%8E%A5%E7%9F%A9%E9%98%B51.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://easonxys.github.io/2020/05/12/数据结构与算法第十六讲-图结构（Java）/"/>
+
+
+
+
+
+  <title>数据结构与算法第十六讲-图结构（Java） | Amazing</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Amazing</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">春有百花秋有月 夏有凉风冬有雪</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Eason">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/caticon.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Amazing">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法第十六讲-图结构（Java）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-12T11:05:20+08:00">
+                2020-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                  <span class="post-meta-divider">|</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>图形结构是一种比树形结构更复杂的非线性结构。在树形结构中，结点间具有分支层次关系，每一层上的结点只能和上一层中的至多一个结点相关，但可能和下一层的多个结点相关。而在图形结构中，任意两个结点之间都可能相关，即结点之间的邻接关系可以是任意的。</p>
+<a id="more"></a>
+
+<h4 id="图结构"><a href="#图结构" class="headerlink" title="图结构"></a>图结构</h4><h5 id="一、图结构的存在意义"><a href="#一、图结构的存在意义" class="headerlink" title="一、图结构的存在意义"></a>一、图结构的存在意义</h5><p>之前学习了线性表和树，但是线性链表局限于一个直接前驱和一个直接后继的关系，树也只能有一个前驱结点（即父结点），当需要表示多对多的关系的时候，就需要使用图的结构。</p>
+<h5 id="二、基本定义"><a href="#二、基本定义" class="headerlink" title="二、基本定义"></a>二、基本定义</h5><p>图是一种数据结构，其中结点可以具有零个或者多个相邻的元素。两个结点之间的连接称为边。结点也可以称为顶点。</p>
+<p>无向图：顶点之间的连接没有方向</p>
+<p>有向图：顶点之间的连接有方向</p>
+<p>带权图：边带有权值的图也叫 网</p>
+<h5 id="三、图的表示方式"><a href="#三、图的表示方式" class="headerlink" title="三、图的表示方式"></a>三、图的表示方式</h5><p>图的表示方式有两种：二维数组表示（邻接矩阵）；链表表示（邻接表）</p>
+<p><strong>邻接矩阵</strong></p>
+<p>邻接矩阵是表示图形中顶点之间相邻关系的矩阵</p>
+<img src="/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/邻接矩阵1.png" style="zoom: 50%;">
+
+<p><strong>邻接表</strong></p>
+<p>在邻接矩阵中，需要为每个顶点都分配n个边的空间，其实很多边是不存在的，会造成空间的一定损失；邻接表只关心存在的边，忽略不存在的边，因此不会造成空间浪费，邻接表是由数组+链表组成</p>
+<img src="/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/邻接表1.png" style="zoom:50%;">
+
+<h5 id="四、邻接表的创建与顶点、边添加"><a href="#四、邻接表的创建与顶点、边添加" class="headerlink" title="四、邻接表的创建与顶点、边添加"></a>四、邻接表的创建与顶点、边添加</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Graph</span> </span>&#123;</span><br><span class="line">    <span class="comment">//存储顶点的集合</span></span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;String&gt; vertexList;</span><br><span class="line">    <span class="comment">//存储图对应的邻接矩阵</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] edges;</span><br><span class="line">    <span class="comment">//表示边的数目</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> numOfEdges;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        String[] vertexArr=&#123;<span class="string">"A"</span>,<span class="string">"B"</span>,<span class="string">"C"</span>,<span class="string">"D"</span>,<span class="string">"E"</span>&#125;;</span><br><span class="line">        Graph graph=<span class="keyword">new</span> Graph(vertexArr.length);</span><br><span class="line">        <span class="comment">//遍历添加顶点</span></span><br><span class="line">        <span class="keyword">for</span> (String v:vertexArr)&#123;</span><br><span class="line">            graph.insertVertex(v);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//手动添加边</span></span><br><span class="line">        graph.insertEdge(<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>);        graph.insertEdge(<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>);</span><br><span class="line">        graph.insertEdge(<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>);        graph.insertEdge(<span class="number">1</span>,<span class="number">3</span>,<span class="number">1</span>);</span><br><span class="line">        graph.insertEdge(<span class="number">1</span>,<span class="number">4</span>,<span class="number">1</span>);</span><br><span class="line">        <span class="comment">//打印邻接矩阵</span></span><br><span class="line">        graph.showMatrix();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Graph</span><span class="params">(<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">        edges=<span class="keyword">new</span> <span class="keyword">int</span>[n][n];</span><br><span class="line">        vertexList=<span class="keyword">new</span> ArrayList&lt;String&gt;(n);</span><br><span class="line">        numOfEdges=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//添加顶点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertVertex</span><span class="params">(String v)</span></span>&#123;</span><br><span class="line">        vertexList.add(v);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> v1,v2 表示不同顶点下标</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> weight 表示两个顶点之间的连接关系，1表示有连接，0表示无连接</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//添加边</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertEdge</span><span class="params">(<span class="keyword">int</span> v1,<span class="keyword">int</span> v2,<span class="keyword">int</span> weight)</span></span>&#123;</span><br><span class="line">        edges[v1][v2]=weight;</span><br><span class="line">        <span class="comment">//邻接矩阵是个对称矩阵</span></span><br><span class="line">        edges[v2][v1]=weight;</span><br><span class="line">        numOfEdges++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//打印该邻接矩阵</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showMatrix</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span>[] row:edges)&#123;</span><br><span class="line">            System.err.println(Arrays.toString(row));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回图中有多少边</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumOfEdges</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> numOfEdges;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回图中有多少个顶点</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNumOfVertex</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> vertexList.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="五、图的遍历"><a href="#五、图的遍历" class="headerlink" title="五、图的遍历"></a>五、图的遍历</h5><p>所谓图的遍历，即是对顶点的访问，一般有两种访问策略（1）深度优先遍历（2）广度优先遍历</p>
+<p><strong>图的深度优先遍历（DFS）</strong></p>
+<ul>
+<li>深度优先遍历，从初始访问顶点出发，初始访问顶点可能有多个邻接顶点，深度优先遍历的策略就是首先访问第一个邻接顶点，然后再以这个被访问的邻接顶点作为初始顶点，访问它的第一个邻接顶点，可以这样理解：每次在访问完当前顶点结束后，首先访问当前顶点的第一个邻接顶点</li>
+<li>如此便可以观察到，这样的访问策略是优先往纵向挖掘深入，而不是对一个顶点的所有邻接顶点进行横向访问</li>
+<li>显然，深度优先遍历时一个递归的过程</li>
+</ul>
+<p>深度优先遍历步骤</p>
+<ol>
+<li>访问初始顶点v，并标记顶点v为已经访问</li>
+<li>查找顶点v的第一邻接顶点w</li>
+<li>若w存在，则执行 步骤4；如果w不存在，则回到第一步，从v的下一个顶点继续</li>
+<li>若w未被访问，对w进行深度优先遍历（即将该w顶点作为新的初始顶点v，然后进行 步骤1 2 3）</li>
+<li>若w已被访问，遍历到顶点v的邻接顶点w的下一个顶点，转到 步骤3</li>
+</ol>
+<p><u>为了能够较好表示各个顶点的访问情况，另辟一个布尔类型的数组存储访问情况（1表示已访问，0表示未访问）</u></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//深度优先遍历</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">DFS</span><span class="params">(<span class="keyword">boolean</span>[] isVisited,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    System.out.print(getValueByIndex(v)+<span class="string">" "</span>);</span><br><span class="line">    <span class="comment">//该顶点设置为已访问</span></span><br><span class="line">    isVisited[v]=<span class="keyword">true</span>;</span><br><span class="line">    <span class="comment">//如果当前顶点v的第一邻接顶点w存在</span></span><br><span class="line">    <span class="keyword">int</span> w=getFirstNeighbor(v);</span><br><span class="line">    <span class="keyword">while</span>(w!=-<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="comment">//如果w没有被访问过</span></span><br><span class="line">        <span class="keyword">if</span> (!isVisited[w])&#123;</span><br><span class="line">            DFS(isVisited,w);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果w已经被访问，则使用w之后的v的邻接顶点来更新w</span></span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            w=getNextNeighbor(v,w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//如果图为联通图，使用上述方法就可以得到完整遍历，</span></span><br><span class="line"><span class="comment">// 但是如果图非联通，则需要下述重载保证整个图结构的完整遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">DFS</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//为了防止DFS与BFS互相干扰，在DFS运行前对isVisited[]进行置空</span></span><br><span class="line">    isVisited=<span class="keyword">new</span> <span class="keyword">boolean</span>[getNumOfVertex()];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;getNumOfVertex();j++)&#123;</span><br><span class="line">        <span class="comment">//如果图因为非联通性无法遍历到当前顶点，其访问属性为false，</span></span><br><span class="line">        <span class="comment">// 则对该顶点进行DFS深度优先遍历</span></span><br><span class="line">        <span class="keyword">if</span> (!isVisited[j])&#123;</span><br><span class="line">            DFS(isVisited,j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>图的广度优先遍历（BFS）</strong></p>
+<p>图的广度优先遍历类似于一个分层搜索的过程，广度优先遍历需要使用一个队列保持访问过的顶点的顺序，以便按这个顺序来访问这些顶点的邻接顶点</p>
+<p>广度优先遍历步骤</p>
+<ol>
+<li>访问初始顶点v并标记v为已访问</li>
+<li>顶点v入队列</li>
+<li>当队列非空时，继续向下执行，否则算法结束（如果图为非联通，则还需要进行相应操作）</li>
+<li>出队列，取得队列的头结点u</li>
+<li>查找顶点u的第一个临界顶点w</li>
+<li>如果顶点u的邻接顶点w不存在，则转到 步骤3；否则循环执行以下步骤<ul>
+<li>若顶点w尚未被访问，则访问w并被标记已访问，顶点w入队列</li>
+<li>如果顶点w已访问，则查找顶点w之后的u的下一个邻接顶点并更新为w，转到 步骤6</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">BFS</span><span class="params">(<span class="keyword">boolean</span>[] isVisited,<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="comment">//表示队列的头结点对应的下标</span></span><br><span class="line">    <span class="keyword">int</span> u;</span><br><span class="line">    <span class="comment">//表示当前顶点v的第一邻接顶点</span></span><br><span class="line">    <span class="keyword">int</span> w;</span><br><span class="line">    System.out.print(getValueByIndex(v)+<span class="string">" "</span>);</span><br><span class="line">    isVisited[v]=<span class="keyword">true</span>;</span><br><span class="line">    <span class="comment">//创建队列，记录结点访问的顺序</span></span><br><span class="line">    LinkedList&lt;Integer&gt; queue=<span class="keyword">new</span> LinkedList();</span><br><span class="line">    <span class="comment">//将当前顶点插入队列尾部</span></span><br><span class="line">    queue.addLast(v);</span><br><span class="line">    <span class="keyword">while</span> (!queue.isEmpty())&#123;</span><br><span class="line">        <span class="comment">//如果队列中不为空，则将队列头赋给u，同时从队列中弹出该头结点</span></span><br><span class="line">        u=queue.remove();</span><br><span class="line">        w=getFirstNeighbor(u);</span><br><span class="line">        <span class="comment">//如果u存在第一邻接点w</span></span><br><span class="line">        <span class="keyword">while</span> (w!=-<span class="number">1</span>)&#123;</span><br><span class="line">            <span class="comment">//如果w没有被访问过</span></span><br><span class="line">            <span class="keyword">if</span> (!isVisited[w])&#123;</span><br><span class="line">                System.out.print(getValueByIndex(w)+<span class="string">" "</span>);</span><br><span class="line">                isVisited[w]=<span class="keyword">true</span>;</span><br><span class="line">                queue.addLast(w);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//如果w已经被访问了</span></span><br><span class="line">            w=getNextNeighbor(u,w);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//如果图为联通图，使用上述方法就可以得到完整遍历，</span></span><br><span class="line"><span class="comment">// 但是如果图非联通，则需要下述重载保证整个图结构的完整遍历</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">BFS</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//为了防止DFS与BFS互相干扰，在BFS运行前对isVisited[]进行置空</span></span><br><span class="line">    isVisited=<span class="keyword">new</span> <span class="keyword">boolean</span>[getNumOfVertex()];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;vertexList.size();j++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (!isVisited[j])&#123;</span><br><span class="line">            BFS(isVisited,j);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//得到当前顶点v的第一邻接顶点的下标</span></span><br><span class="line"><span class="comment">//如果v存在第一邻接顶点，就返回其下标</span></span><br><span class="line"><span class="comment">//否则返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getFirstNeighbor</span><span class="params">(<span class="keyword">int</span> v)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;vertexList.size();j++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (edges[v][j]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//返回当前顶点v第一邻接顶点w之后的下一个邻接顶点下标（用于当w已被访问，返回w之后的v的邻接顶点的下标）</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getNextNeighbor</span><span class="params">(<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j=w+<span class="number">1</span>;j&lt;vertexList.size();j++)&#123;</span><br><span class="line">        <span class="keyword">if</span> (edges[v][j]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84DataStructure/" rel="tag"># 数据结构DataStructure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%94%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%EF%BC%88Java%EF%BC%89/" rel="next" title="数据结构与算法第十五讲-树结构实际应用（Java）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法第十五讲-树结构实际应用（Java）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/caticon.jpg"
+                alt="Eason" />
+            
+              <p class="site-author-name" itemprop="name">Eason</p>
+              <p class="site-description motion-element" itemprop="description">学习备忘录</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#图结构"><span class="nav-number">1.</span> <span class="nav-text">图结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、图结构的存在意义"><span class="nav-number">1.1.</span> <span class="nav-text">一、图结构的存在意义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、基本定义"><span class="nav-number">1.2.</span> <span class="nav-text">二、基本定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、图的表示方式"><span class="nav-number">1.3.</span> <span class="nav-text">三、图的表示方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四、邻接表的创建与顶点、边添加"><span class="nav-number">1.4.</span> <span class="nav-text">四、邻接表的创建与顶点、边添加</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五、图的遍历"><span class="nav-number">1.5.</span> <span class="nav-text">五、图的遍历</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">徐宇颂</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+
+
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共32.3k字</span>
+</div>
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
