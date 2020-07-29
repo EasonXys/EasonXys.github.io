@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -79,15 +79,21 @@
 
 
 
-<meta name="description" content="学习备忘录">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Amazing">
-<meta property="og:url" content="http://easonxys.github.io/index.html">
+<meta name="description" content="尚硅谷ES6一、let关键字作用：与var类似，用于声明一个变量 特点：  在 块作用域 内有效 不能重复声明 不存在变量提升 存在暂时性死区 在全局执行上下文中，let声明的变量仅是全局变量，不会成为全局对象（window）的属性  预解析&#x2F;预处理：JS引擎会把JS里面所有的var 和function提升到当前作用域的最前面，预解析分为变量声明提升和函数声明提升，预解析之后才会从上向下执行代码。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级（尚硅谷）">
+<meta property="og:url" content="http://easonxys.github.io/2020/06/02/ES6%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/index.html">
 <meta property="og:site_name" content="Amazing">
-<meta property="og:description" content="学习备忘录">
+<meta property="og:description" content="尚硅谷ES6一、let关键字作用：与var类似，用于声明一个变量 特点：  在 块作用域 内有效 不能重复声明 不存在变量提升 存在暂时性死区 在全局执行上下文中，let声明的变量仅是全局变量，不会成为全局对象（window）的属性  预解析&#x2F;预处理：JS引擎会把JS里面所有的var 和function提升到当前作用域的最前面，预解析分为变量声明提升和函数声明提升，预解析之后才会从上向下执行代码。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://easonxys.github.io/2020/06/02/ES6%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/%E4%BD%BF%E7%94%A8let%E8%BF%9B%E8%A1%8Cfor%E5%BE%AA%E7%8E%AF.png">
+<meta property="og:image" content="http://easonxys.github.io/2020/06/02/ES6%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/Objectassign.png">
+<meta property="article:published_time" content="2020-06-02T14:53:52.000Z">
+<meta property="article:modified_time" content="2020-07-29T06:51:10.781Z">
 <meta property="article:author" content="Eason">
+<meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://easonxys.github.io/2020/06/02/ES6%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/%E4%BD%BF%E7%94%A8let%E8%BF%9B%E8%A1%8Cfor%E5%BE%AA%E7%8E%AF.png">
 
 
 
@@ -117,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://easonxys.github.io/"/>
+  <link rel="canonical" href="http://easonxys.github.io/2020/06/02/ES6（尚硅谷）/"/>
 
 
 
 
 
-  <title>Amazing</title>
+  <title>JavaScript高级（尚硅谷） | Amazing</title>
   
 
 
@@ -142,8 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -228,9 +233,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -260,9 +265,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/02/ES6%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/" itemprop="url">JavaScript高级（尚硅谷）</a></h1>
+          <h1 class="post-title" itemprop="name headline">JavaScript高级（尚硅谷）</h1>
         
 
         <div class="post-meta">
@@ -316,6 +319,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
             <div class="post-wordcount">
@@ -367,9 +375,7 @@
       
 
       
-        
-          
-            <h3 id="尚硅谷ES6"><a href="#尚硅谷ES6" class="headerlink" title="尚硅谷ES6"></a>尚硅谷ES6</h3><h4 id="一、let关键字"><a href="#一、let关键字" class="headerlink" title="一、let关键字"></a>一、let关键字</h4><p>作用：与var类似，用于声明一个变量</p>
+        <h3 id="尚硅谷ES6"><a href="#尚硅谷ES6" class="headerlink" title="尚硅谷ES6"></a>尚硅谷ES6</h3><h4 id="一、let关键字"><a href="#一、let关键字" class="headerlink" title="一、let关键字"></a>一、let关键字</h4><p>作用：与var类似，用于声明一个变量</p>
 <p>特点：</p>
 <ul>
 <li>在 块作用域 内有效</li>
@@ -689,8 +695,6 @@
 
 
 
-          
-        
       
     </div>
     
@@ -705,392 +709,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/05/24/JavaScript%E9%AB%98%E7%BA%A7%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/24/JavaScript%E9%AB%98%E7%BA%A7%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/" itemprop="url">JavaScript高级（尚硅谷）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-24T22:53:52+08:00">
-                2020-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  14.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  54
-                </span>
-              
-            </div>
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>JS高级包括但不限于以下内容：</p>
-<p>数据、变量及内存；函数；对象；<u>原型及原型链</u>、原型链的继承；<u>执行上下文</u>；作用域；<u>闭包</u>  ……</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/24/JavaScript%E9%AB%98%E7%BA%A7%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/24/JavaScript%E9%AB%98%E7%BA%A7%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/" rel="next" title="JavaScript高级（尚硅谷）">
+                <i class="fa fa-chevron-left"></i> JavaScript高级（尚硅谷）
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/05/12/JavaScript%E5%9F%BA%E7%A1%80%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/12/JavaScript%E5%9F%BA%E7%A1%80%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/" itemprop="url">JavaScript基础（尚硅谷）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-12T12:12:05+08:00">
-                2020-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AF%AD%E8%A8%80/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  24.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  91
-                </span>
-              
-            </div>
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p><strong>JavaScript的基本介绍</strong></p>
-<p>ECMAScript是JavaScript（一门基于对象的、运行在客户端的脚本语言）标准，一般情况下认为是一个意思。一个完整的JavaScript实现应该由以下三个部分构成：</p>
-<ul>
-<li>ECMAScript：由ECMA-262定义，提供核心语言功能</li>
-<li>DOM：将页面映射为一个多层节点结构，并提供访问和操作网页内容的方法和接口</li>
-<li>BOM：提供与浏览器交互的方法和接口</li>
-</ul>
-<p><strong>JavaScript的特点</strong></p>
-<ul>
-<li><p>解释性语言（无需编译，写完直接由上向下运行）</p>
-</li>
-<li><p>类似于C和Java的语法结构</p>
-</li>
-<li><p>动态语言（动态语言是在运行时确定数据类型的语言。变量使用之前不需要类型声明，通常变量的类型是被赋值的那个值的类型。 ）</p>
-</li>
-<li><p>基于原型的面向对象</p>
-</li>
-</ul>
-<p><strong>script的放置位置</strong></p>
-<p>虽然浏览器是多线程的，但是JS是单线程的，如果在&lt;head&gt;标签中添加所有JavaScript文件，就意味着必须等到全部JavaScript代码都被下载，解析和执行完成以后，才能呈现页面的内容（浏览器在遇到&lt;body&gt;标签时才开始呈现内容，而在此之间，浏览器窗口将是一片空白。为了不引起浏览器阻塞，建议将&lt;script&gt;标签放置在页面尾部）</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/12/JavaScript%E5%9F%BA%E7%A1%80%EF%BC%88%E5%B0%9A%E7%A1%85%E8%B0%B7%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1100,1275 +748,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十六讲-图结构（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-05-12T11:05:20+08:00">
-                2020-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>图形结构是一种比树形结构更复杂的非线性结构。在树形结构中，结点间具有分支层次关系，每一层上的结点只能和上一层中的至多一个结点相关，但可能和下一层的多个结点相关。而在图形结构中，任意两个结点之间都可能相关，即结点之间的邻接关系可以是任意的。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/12/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%85%AD%E8%AE%B2-%E5%9B%BE%E7%BB%93%E6%9E%84%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%94%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%94%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十五讲-树结构实际应用（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-28T14:21:16+08:00">
-                2020-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  4.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  19
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>树结构的实际应用内容：堆排序、赫夫曼树、二叉排序树（BST）、平衡二叉树（AVL）、多路查找树</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%94%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十四讲-树结构基础部分（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-28T14:13:35+08:00">
-                2020-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  4.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  16
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>树结构基础部分：树结构与分类、二叉树遍历、二叉树查找、二叉树删除、顺序存储二叉树、线索二叉树、遍历线索二叉树</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E5%9B%9B%E8%AE%B2-%E6%A0%91%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AE%B2-%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AE%B2-%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十三讲 哈希表（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-17T16:47:42+08:00">
-                2020-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>散列技术是在记录的存储位置和它的关键字之间建立一个确定的对应关系 <strong>f</strong>，使得每个关键字 <strong>key</strong> 对应一个存储位置 <strong>f(key)</strong>。其中 <strong>f</strong> 称为散列函数，又称哈希函数。按照这个思想，采用散列技术将记录存储在一块连续的存储空间中，这块连续存储空间称为散列表或哈希表。那么关键字对应的记录存储位置为散列地址。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%89%E8%AE%B2-%E5%93%88%E5%B8%8C%E8%A1%A8%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%8C%E8%AE%B2-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%8C%E8%AE%B2-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十二讲 查找算法（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-17T16:47:16+08:00">
-                2020-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  1.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  7
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>顺序查找</strong></p>
-<p><strong>二分查找</strong>：在有序表中，取中间记录作为比较对象，如果给定值与中间记录的关键字相等，则查找成功；若给定值小于中间记录的关键字，则在中间记录的左半区继续查找（进行递归）；若给定值大于中间记录的关键字，则在中间记录的右半区进行查找（进行递归）。不断重复上述过程，直至查找成功，或所有查找区域无记录，查找失败为止。</p>
-<p><strong>插值查找</strong>：插值查找算法类似于二分查找，不同的是插值查找每次从自适应mid处开始查找</p>
-<p><strong>斐波那契（黄金分割）查找</strong>：斐波那契查找原理与前两种相似，仅仅改变了中间结点（mid）的位置，mid不再是二分或插值得到，而是位于黄金分割点附近，即<strong>mid=left+F(k-1)-1</strong>（F代表斐波那契数列）</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/17/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%BA%8C%E8%AE%B2-%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十一讲 排序二（快速、归并、基数）（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-13T15:05:41+08:00">
-                2020-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>快速排序</strong>：通过一趟排序将待排序的数据分割成两个部分，其中一部分的所有数据比另一部分的所有数据都要小，然后再按此方法对这两部分的数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列</p>
-<p><strong>归并排序</strong>：假设初始序列含有n个数据，则可以看成n个有序的子序列，每个子序列的长度为1，然后两两归并，得到 [n/2] (<small>[num]表示不小于num的最小整数</small>)个长度为2或1的有序子序列；再两两归并……，如此重复，直至得到一个长度为n的有序序列为止</p>
-<p><strong>基数排序</strong>：将所有待比较的数值统一为同样的数位长度，数位较短的数前面补零。然后从低位开始，依次进行一次排序。这样从最低位排序一直到最高位排序完成后，数列就变成一个有序序列</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/13/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E4%B8%80%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%BA%8C%EF%BC%88%E5%BF%AB%E9%80%9F%E3%80%81%E5%BD%92%E5%B9%B6%E3%80%81%E5%9F%BA%E6%95%B0%EF%BC%89%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://easonxys.github.io/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Eason">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/caticon.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Amazing">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/" itemprop="url">数据结构与算法第十讲 排序一（冒泡、简单选择、直接插入、希尔）（Java）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-04-09T22:11:57+08:00">
-                2020-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                  <span class="post-meta-divider">|</span>
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  3k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  11
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><strong>冒泡排序</strong>：两两比较相邻记录的关键字，如果反序则交换，直到没有反序的记录为止。（优化：当单趟排序没有任何数据交换，说明此序列已经有序，不需要在继续后面的循环判断工作了，可以提早结束排序操作）</p>
-<p><strong>简单选择排序</strong>：从待排序的数据中，按指定的规则选出来一个元素，在依规定交换位置后达到排序的目的</p>
-<p><strong>直接插入排序</strong>：将一个记录插入到已经排好序的有序表中，从而得到一个新的、记录数增1的有序表</p>
-<p><strong>希尔排序</strong>：把记录按下标的一定增量分组，对每组直接插入排序算法排序；随着增量逐渐减少，每组包含的关键字越来越多，当增量减至1时，整个文件恰好被分成一组，算法终止。它是插入排序改进后的更加高效的版本</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/09/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E7%AC%AC%E5%8D%81%E8%AE%B2-%E6%8E%92%E5%BA%8F%E4%B8%80%EF%BC%88%E5%86%92%E6%B3%A1%E3%80%81%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E3%80%81%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E3%80%81%E5%B8%8C%E5%B0%94%EF%BC%89%EF%BC%88Java%EF%BC%89/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
-  </nav>
-
 
 
           </div>
@@ -2376,6 +760,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -2396,8 +784,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2461,6 +858,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#尚硅谷ES6"><span class="nav-number">1.</span> <span class="nav-text">尚硅谷ES6</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、let关键字"><span class="nav-number">1.1.</span> <span class="nav-text">一、let关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、const关键字"><span class="nav-number">1.2.</span> <span class="nav-text">二、const关键字</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、变量的解构赋值"><span class="nav-number">1.3.</span> <span class="nav-text">三、变量的解构赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、模板字符串"><span class="nav-number">1.4.</span> <span class="nav-text">四、模板字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、对象的简写方式"><span class="nav-number">1.5.</span> <span class="nav-text">五、对象的简写方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六、箭头函数"><span class="nav-number">1.6.</span> <span class="nav-text">六、箭头函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#七、…-三点运算符与解构赋值"><span class="nav-number">1.7.</span> <span class="nav-text">七、… 三点运算符与解构赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#八、形参默认值"><span class="nav-number">1.8.</span> <span class="nav-text">八、形参默认值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#九、Promise对象（详见尚硅谷Promise）"><span class="nav-number">1.9.</span> <span class="nav-text">九、Promise对象（详见尚硅谷Promise）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十、Symbol属性介绍"><span class="nav-number">1.10.</span> <span class="nav-text">十、Symbol属性介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十一、Iterator接口机制"><span class="nav-number">1.11.</span> <span class="nav-text">十一、Iterator接口机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十二、Generator函数"><span class="nav-number">1.12.</span> <span class="nav-text">十二、Generator函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十三、async函数（源自ES2017）"><span class="nav-number">1.13.</span> <span class="nav-text">十三、async函数（源自ES2017）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十四、class类"><span class="nav-number">1.14.</span> <span class="nav-text">十四、class类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十五、数据类型方法的扩展"><span class="nav-number">1.15.</span> <span class="nav-text">十五、数据类型方法的扩展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十六、对象的深度克隆"><span class="nav-number">1.16.</span> <span class="nav-text">十六、对象的深度克隆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十七、Set容器、Map容器"><span class="nav-number">1.17.</span> <span class="nav-text">十七、Set容器、Map容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#十八、for…of-的用法"><span class="nav-number">1.18.</span> <span class="nav-text">十八、for…of 的用法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2631,6 +1044,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
