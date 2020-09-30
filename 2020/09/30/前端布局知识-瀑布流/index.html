@@ -86,12 +86,12 @@
 <meta property="og:site_name" content="Amazing">
 <meta property="og:description" content="瀑布流（等宽）等宽瀑布流涉及HTML、CSS、Javascript、position定位等知识，另需要结合图片懒加载及AJAX技术进一步优化，未完待续。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://easonxys.github.io/2020/09/30/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/%E5%B8%83%E5%B1%80%E6%A8%A1%E5%BC%8F.jpg">
+<meta property="og:image" content="http://easonxys.github.io/2020/09/30/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/%E5%B8%83%E5%B1%80%E6%A8%A1%E5%BC%8F.jpg">
 <meta property="article:published_time" content="2020-09-29T20:17:38.000Z">
-<meta property="article:modified_time" content="2020-09-29T20:25:30.861Z">
+<meta property="article:modified_time" content="2020-09-30T02:34:53.045Z">
 <meta property="article:author" content="Eason">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://easonxys.github.io/2020/09/30/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/%E5%B8%83%E5%B1%80%E6%A8%A1%E5%BC%8F.jpg">
+<meta name="twitter:image" content="http://easonxys.github.io/2020/09/30/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/%E5%B8%83%E5%B1%80%E6%A8%A1%E5%BC%8F.jpg">
 
 
 
@@ -314,7 +314,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1k
+                  1.1k
                 </span>
               
 
@@ -355,6 +355,11 @@
 <a id="more"></a>
 
 <p>瀑布流布局多用于图片墙的展示，顾名思义，网页表现为<u>将内容从上往下、从左往右依次叠加排列</u>。随着页面滚动条向下滚动，这种布局会不断加载内容快并附加至当前页面的尾部。</p>
+<h4 id="瀑布流的优点"><a href="#瀑布流的优点" class="headerlink" title="瀑布流的优点"></a>瀑布流的优点</h4><ul>
+<li>节省空间，外表美观，更有艺术性。</li>
+<li>对于触屏设备非常友好，通过向上滑动浏览</li>
+<li>用户浏览时的观赏和思维不容易被打断，留存更容易。</li>
+</ul>
 <h4 id="瀑布流的分类"><a href="#瀑布流的分类" class="headerlink" title="瀑布流的分类"></a>瀑布流的分类</h4><ul>
 <li><p>等宽瀑布流</p>
 <p>内容中所有图片的宽度一致，高度等比例缩放，因此页面的底部一般无法对齐。</p>
@@ -364,17 +369,17 @@
 </li>
 </ul>
 <blockquote>
-<p>由于瀑布流存在下一行图片优先顶格排列在上一行最短列下的特性，因此使用flex或者float的CSS布局并不合适，还是需要使用<code>Javascript</code>搭配 position定位 进行操作。</p>
+<p>由于等宽瀑布流存在下一行图片优先顶格排列在最短列下的特性，因此使用flex、grid或者float的CSS布局并不合适，还是需要使用<code>Javascript</code>搭配 position定位 进行操作。</p>
 </blockquote>
 <h4 id="实战步骤"><a href="#实战步骤" class="headerlink" title="实战步骤"></a>实战步骤</h4><ol>
 <li><strong>布局模式选择</strong></li>
 </ol>
-<img src="/2020/09/30/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/前端布局知识-瀑布流\布局模式.jpg" style="zoom:67%;">
+<img src="/2020/09/30/%E5%89%8D%E7%AB%AF%E5%B8%83%E5%B1%80%E7%9F%A5%E8%AF%86-%E7%80%91%E5%B8%83%E6%B5%81/布局模式.jpg" style="zoom:67%;">
 
 <p>按照右侧纵向分布方式的排列，存在以下缺点：</p>
 <p>（1） 当滚动条向下滚动到底部，不方便图片的追加加载</p>
-<p>（2）如果列数过多，不方便布局操作，事件复杂度会很高</p>
-<p>因此一般情况下，选择左侧的横向分布模式（左侧图示其实并不准确，详见第二步<code>图片渲染顺序</code>）</p>
+<p>（2）如果列数过多，不方便布局操作，时间复杂度会很高</p>
+<p>因此一般情况下，选择左侧的横向分布模式（左侧图示的渲染顺序其实并不准确严谨，详见第二步<code>图片渲染顺序</code>）</p>
 <ol start="2">
 <li><p><strong>数据渲染分析</strong></p>
 <p>在等宽瀑布流中，图片数据的是通过AJAX发送请求获取的。</p>
@@ -598,7 +603,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#瀑布流（等宽）"><span class="nav-number">1.</span> <span class="nav-text">瀑布流（等宽）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#瀑布流的分类"><span class="nav-number">1.1.</span> <span class="nav-text">瀑布流的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实战步骤"><span class="nav-number">1.2.</span> <span class="nav-text">实战步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo案例"><span class="nav-number">1.3.</span> <span class="nav-text">Demo案例</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#瀑布流（等宽）"><span class="nav-number">1.</span> <span class="nav-text">瀑布流（等宽）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#瀑布流的优点"><span class="nav-number">1.1.</span> <span class="nav-text">瀑布流的优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#瀑布流的分类"><span class="nav-number">1.2.</span> <span class="nav-text">瀑布流的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实战步骤"><span class="nav-number">1.3.</span> <span class="nav-text">实战步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo案例"><span class="nav-number">1.4.</span> <span class="nav-text">Demo案例</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -647,7 +652,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共91.5k字</span>
+  <span class="post-count">博客全站共91.6k字</span>
 </div>
 
 
